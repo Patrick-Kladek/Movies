@@ -12,6 +12,7 @@
 		CDA3E29C28D4D7ED003E3278 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3E29B28D4D7ED003E3278 /* MoviesViewController.swift */; };
 		CDA3E2A128D4D7EE003E3278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDA3E2A028D4D7EE003E3278 /* Assets.xcassets */; };
 		CDA3E2A428D4D7EE003E3278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDA3E2A228D4D7EE003E3278 /* LaunchScreen.storyboard */; };
+		CDA3E2AC28D4EB41003E3278 /* staff_picks.json in Resources */ = {isa = PBXBuildFile; fileRef = CDA3E2AB28D4EB41003E3278 /* staff_picks.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CDA3E2A028D4D7EE003E3278 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDA3E2A328D4D7EE003E3278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDA3E2A528D4D7EE003E3278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDA3E2AB28D4EB41003E3278 /* staff_picks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = staff_picks.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,11 +59,20 @@
 				CDA3E29728D4D7ED003E3278 /* AppDelegate.swift */,
 				CDA3E29928D4D7ED003E3278 /* SceneDelegate.swift */,
 				CDA3E29B28D4D7ED003E3278 /* MoviesViewController.swift */,
-				CDA3E2A028D4D7EE003E3278 /* Assets.xcassets */,
-				CDA3E2A228D4D7EE003E3278 /* LaunchScreen.storyboard */,
-				CDA3E2A528D4D7EE003E3278 /* Info.plist */,
+				CDA3E2AB28D4EB41003E3278 /* staff_picks.json */,
+				CDA3E2AD28D4EB45003E3278 /* Supporting Files */,
 			);
 			path = Movies;
+			sourceTree = "<group>";
+		};
+		CDA3E2AD28D4EB45003E3278 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CDA3E2A528D4D7EE003E3278 /* Info.plist */,
+				CDA3E2A228D4D7EE003E3278 /* LaunchScreen.storyboard */,
+				CDA3E2A028D4D7EE003E3278 /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,6 +133,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDA3E2AC28D4EB41003E3278 /* staff_picks.json in Resources */,
 				CDA3E2A428D4D7EE003E3278 /* LaunchScreen.storyboard in Resources */,
 				CDA3E2A128D4D7EE003E3278 /* Assets.xcassets in Resources */,
 			);
@@ -276,7 +288,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Movies/Info.plist;
+				INFOPLIST_FILE = "Movies/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -305,7 +317,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Movies/Info.plist;
+				INFOPLIST_FILE = "Movies/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
