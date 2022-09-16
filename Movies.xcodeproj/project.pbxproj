@@ -56,10 +56,8 @@
 		CDA3E29628D4D7ED003E3278 /* Movies */ = {
 			isa = PBXGroup;
 			children = (
-				CDA3E29728D4D7ED003E3278 /* AppDelegate.swift */,
-				CDA3E29928D4D7ED003E3278 /* SceneDelegate.swift */,
-				CDA3E29B28D4D7ED003E3278 /* MoviesViewController.swift */,
-				CDA3E2AB28D4EB41003E3278 /* staff_picks.json */,
+				CDA3E2AF28D4EBC8003E3278 /* Sources */,
+				CDA3E2AE28D4EBBD003E3278 /* Resources */,
 				CDA3E2AD28D4EB45003E3278 /* Supporting Files */,
 			);
 			path = Movies;
@@ -73,6 +71,24 @@
 				CDA3E2A028D4D7EE003E3278 /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CDA3E2AE28D4EBBD003E3278 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CDA3E2AB28D4EB41003E3278 /* staff_picks.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CDA3E2AF28D4EBC8003E3278 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				CDA3E29728D4D7ED003E3278 /* AppDelegate.swift */,
+				CDA3E29928D4D7ED003E3278 /* SceneDelegate.swift */,
+				CDA3E29B28D4D7ED003E3278 /* MoviesViewController.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
