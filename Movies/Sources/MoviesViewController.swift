@@ -9,7 +9,12 @@ import UIKit
 
 class MoviesViewController: UICollectionViewController {
 
-    init() {
+    let viewModel: MoviesViewModel
+
+    // MARK: - Private
+
+    init(viewModel: MoviesViewModel) {
+        self.viewModel = viewModel
         let layout = Self.makeLayout()
         super.init(collectionViewLayout: layout)
     }

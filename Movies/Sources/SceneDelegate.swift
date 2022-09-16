@@ -15,9 +15,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        self.window = UIWindow(windowScene: windowScene)
-        self.window?.rootViewController = MoviesViewController()
-        self.window?.makeKeyAndVisible()
+        let window = UIWindow(windowScene: windowScene)
+        defer {
+            self.window = window
+        }
+
+        do {
+            let viewModel = try MoviesViewModel()
+            window.rootViewController = MoviesViewController(viewModel: viewModel)
+            window.makeKeyAndVisible()
+        } catch LoadingError.fileMissing(let name) {
+            fatalError("Could not load movies with name: \(name). Check Build Pipeline")
+        } catch {
+            fatalError("Error loading Movies")
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
