@@ -95,6 +95,7 @@ class MoviesViewController: UICollectionViewController {
             cell.attributedTitle = NSLocalizedString("YOUR *FAVORITES*", comment: "Label. Short. Home-Screen. Title for Favourites Section").parseMarkup()
         case 2:
             cell.attributedTitle = NSLocalizedString("OUR *STAFF PICKS*", comment: "Label. Short. Home-Screen. Title for Favourites Section").parseMarkup()
+            cell.textColor = .white
         default:
             break
         }

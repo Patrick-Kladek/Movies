@@ -29,6 +29,11 @@ final class HeaderCell: UICollectionReusableView, Reusable {
         set { self.label.attributedText = newValue }
     }
 
+    var textColor: UIColor {
+        get { self.label.textColor }
+        set { self.label.textColor = newValue }
+    }
+
     // MARK: - Reusable
 
     static var supplementaryViewOfKind: SupplementaryType? {

@@ -9,7 +9,10 @@ import UIKit
 
 extension String {
 
-    func parseMarkup(defaultFont: UIFont? = UIFont(name: "SF Pro", size: UIFont.systemFontSize)) -> NSAttributedString {
+    private static let defaultMarkupFont: UIFont? = UIFont(name: "SF Pro", size: UIFont.systemFontSize)?
+        .weight(.regular)
+
+    func parseMarkup(defaultFont: UIFont? = String.defaultMarkupFont) -> NSAttributedString {
         let font = defaultFont ?? UIFont.systemFont(ofSize: UIFont.systemFontSize)
         let attributedString = NSMutableAttributedString(string: self)
 
@@ -21,7 +24,7 @@ extension String {
             let boldRange = (self as NSString).range(of: bold)
 
             attributedString.addAttributes([
-                .font: font.bold().scaled(),
+                .font: font.weight(.heavy).scaled(),
                 .foregroundColor: UIColor.black.cgColor
             ], range: boldRange)
         }
