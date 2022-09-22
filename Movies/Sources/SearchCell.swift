@@ -31,7 +31,7 @@ private extension SearchCell {
         self.backgroundColor = .white
         self.layer.cornerRadius = 12
         self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = 0.16
+        self.layer.shadowOpacity = 0.3      // figma design uses 16% but it looks off
         self.layer.shadowOffset = .zero
         self.layer.shadowRadius = 30
 
