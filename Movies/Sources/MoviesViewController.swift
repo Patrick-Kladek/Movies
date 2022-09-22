@@ -30,7 +30,7 @@ class MoviesViewController: UICollectionViewController {
 
         self.view.backgroundColor = .white
         self.collectionView.backgroundColor = .clear
-        self.collectionView.contentInsetAdjustmentBehavior = .never
+//        self.collectionView.contentInsetAdjustmentBehavior = .never
         self.collectionView.registerReusableCell(SearchCell.self)
         self.collectionView.registerReusableCell(MovieCell.self)
         self.collectionView.registerReusableSupplementaryView(HeaderCell.self)
@@ -67,7 +67,16 @@ class MoviesViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell: HeaderCell = collectionView.dequeueReusableSupplementaryView(indexPath: indexPath)
-        cell.attributedTitle = "YOUR *FAVORITES*".parseMarkup()
+
+        switch indexPath.section {
+        case 1:
+            cell.attributedTitle = NSLocalizedString("YOUR *FAVORITES*", comment: "Label. Short. Home-Screen. Title for Favourites Section").parseMarkup()
+        case 2:
+            cell.attributedTitle = NSLocalizedString("OUR *STAFF PICKS*", comment: "Label. Short. Home-Screen. Title for Favourites Section").parseMarkup()
+        default:
+            break
+        }
+
         return cell
     }
 }
@@ -89,7 +98,6 @@ private extension MoviesViewController {
         }
 
         let config = UICollectionViewCompositionalLayoutConfiguration()
-//        config.interSectionSpacing = 15
 
         let layout = UICollectionViewCompositionalLayout(sectionProvider: sectionProvider, configuration: config)
         return layout
@@ -106,7 +114,7 @@ private extension MoviesViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 60, leading: 20, bottom: 50, trailing: 20)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 50, trailing: 20)
 
         return section
     }
@@ -152,7 +160,14 @@ private extension MoviesViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 15  // TODO: reduce to zero based on design
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20)
+
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                heightDimension: .estimated(20.0))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                 elementKind: UICollectionView.elementKindSectionHeader,
+                                                                 alignment: .top)
+        section.boundarySupplementaryItems = [header]
 
         return section
     }
