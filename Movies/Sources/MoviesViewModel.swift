@@ -5,7 +5,7 @@
 //  Created by Patrick Kladek on 16.09.22.
 //
 
-import Foundation
+import UIKit
 
 enum LoadingError: Error {
     case fileMissing(name: String)
@@ -19,6 +19,22 @@ struct MoviesViewModel {
     init() throws {
         self.favorites = try Self.loadMovies(named: "movies")
         self.staffPicks = try Self.loadMovies(named: "staff_picks")
+    }
+}
+
+// MARK: - Movies
+
+private var associateMovieImageKey: Void?
+
+extension Movie {
+
+    var image: UIImage? {
+        get {
+            return objc_getAssociatedObject(self, &associateMovieImageKey) as? UIImage
+        }
+        set {
+            objc_setAssociatedObject(self, &associateMovieImageKey, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
     }
 }
 

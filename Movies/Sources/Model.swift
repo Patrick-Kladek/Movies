@@ -13,7 +13,7 @@
 import Foundation
 
 // MARK: - Movie
-struct Movie: Codable {
+class Movie: Codable {
     let rating: Double
     let id: Int
     let revenue: Int?
@@ -35,7 +35,7 @@ struct Movie: Codable {
 }
 
 // MARK: - Cast
-struct Cast: Codable {
+class Cast: Codable {
     let name: String
     let pictureURL: String
     let character: String
@@ -48,7 +48,7 @@ struct Cast: Codable {
 }
 
 // MARK: - Director
-struct Director: Codable {
+class Director: Codable {
     let name: String
     let pictureURL: String
 

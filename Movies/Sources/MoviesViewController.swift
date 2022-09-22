@@ -30,23 +30,24 @@ class MoviesViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.overrideUserInterfaceStyle = .light
         self.view.backgroundColor = .white
         self.collectionView.backgroundColor = .clear
         self.collectionView.registerReusableCell(SearchCell.self)
+        self.collectionView.registerReusableCell(PosterCell.self)
         self.collectionView.registerReusableCell(MovieCell.self)
         self.collectionView.registerReusableSupplementaryView(HeaderCell.self)
 
         // Background.png top curve is about 62px tall
         let capInsets = UIEdgeInsets(top: 65, left: 0, bottom: 0, right: 0)
-        let image = UIImage(named: "Background")?.resizableImage(withCapInsets: capInsets)
+        let image = UIImage(named: "Background")?.resizableImage(withCapInsets: capInsets, resizingMode: .stretch)
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         self.collectionView.insertSubview(imageView, at: 0)
         NSLayoutConstraint.activate([
             imageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             imageView.topAnchor.constraint(equalTo: self.collectionView.contentLayoutGuide.topAnchor, constant: 268),
-            imageView.widthAnchor.constraint(equalTo: self.collectionView.widthAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 714)
+            imageView.widthAnchor.constraint(equalTo: self.collectionView.widthAnchor)
         ])
         self.backgroundImageView = imageView
     }
@@ -56,6 +57,10 @@ class MoviesViewController: UICollectionViewController {
 
         guard let view = self.backgroundImageView else { return }
         self.collectionView.sendSubviewToBack(view)
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 
     // MARK: UICollectionViewController
@@ -78,13 +83,36 @@ class MoviesViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
+        switch indexPath.section{
+        case 0:
             let cell: SearchCell = collectionView.dequeueReusableCell(indexPath: indexPath)
             return cell
+        case 1:
+            let cell: PosterCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+            let movie = self.viewModel.favorites[indexPath.row]
+
+            if movie.image == nil {
+                let request = URLRequest(url: URL(string: movie.posterURL)!)
+                let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                    guard let data = data else { return }
+
+                    let image = UIImage(data: data)
+                    movie.image = image
+                    DispatchQueue.main.async {
+                        cell.image = image
+                    }
+                }
+                task.resume()
+            }
+            cell.backgroundColor = .quaternarySystemFill
+            return cell
+        case 2:
+            let cell: MovieCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+            cell.backgroundColor = .blue
+            return cell
+        default:
+            fatalError("Missing Cell for CollectionView Section")
         }
-        let cell: MovieCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        cell.backgroundColor = .blue
-        return cell
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -93,6 +121,7 @@ class MoviesViewController: UICollectionViewController {
         switch indexPath.section {
         case 1:
             cell.attributedTitle = NSLocalizedString("YOUR *FAVORITES*", comment: "Label. Short. Home-Screen. Title for Favourites Section").parseMarkup()
+            cell.textColor = .black
         case 2:
             cell.attributedTitle = NSLocalizedString("OUR *STAFF PICKS*", comment: "Label. Short. Home-Screen. Title for Favourites Section").parseMarkup()
             cell.textColor = .white
@@ -146,7 +175,7 @@ private extension MoviesViewController {
         let estimatedHeight: CGFloat = 270
 
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .estimated(estimatedHeight))
+                                              heightDimension: .absolute(estimatedHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupFractionalWidth = 0.5
