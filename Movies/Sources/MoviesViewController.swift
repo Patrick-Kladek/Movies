@@ -67,7 +67,7 @@ class MoviesViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell: HeaderCell = collectionView.dequeueReusableSupplementaryView(indexPath: indexPath)
-        cell.title = "YOUR FAVORITES"
+        cell.attributedTitle = "YOUR *FAVORITES*".parseMarkup()
         return cell
     }
 }

@@ -24,9 +24,9 @@ final class HeaderCell: UICollectionReusableView, Reusable {
 
     // MARK: - HeaderCell
 
-    var title: String? {
-        get { self.label.text}
-        set { self.label.text = newValue }
+    var attributedTitle: NSAttributedString? {
+        get { self.label.attributedText }
+        set { self.label.attributedText = newValue }
     }
 
     // MARK: - Reusable
@@ -41,8 +41,8 @@ final class HeaderCell: UICollectionReusableView, Reusable {
 private extension HeaderCell {
 
     func setup() {
-        self.backgroundColor = .red
         self.label.translatesAutoresizingMaskIntoConstraints = false
+        self.label.adjustsFontForContentSizeCategory = true
         self.addSubview(self.label)
         NSLayoutConstraint.activate([
             self.label.leadingAnchor.constraint(equalTo: self.leadingAnchor),
