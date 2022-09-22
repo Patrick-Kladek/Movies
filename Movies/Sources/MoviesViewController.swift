@@ -9,6 +9,8 @@ import UIKit
 
 class MoviesViewController: UICollectionViewController {
 
+    private var backgroundImageView: UIImageView?
+
     let viewModel: MoviesViewModel
 
     // MARK: - Private
@@ -30,10 +32,30 @@ class MoviesViewController: UICollectionViewController {
 
         self.view.backgroundColor = .white
         self.collectionView.backgroundColor = .clear
-//        self.collectionView.contentInsetAdjustmentBehavior = .never
         self.collectionView.registerReusableCell(SearchCell.self)
         self.collectionView.registerReusableCell(MovieCell.self)
         self.collectionView.registerReusableSupplementaryView(HeaderCell.self)
+
+        // Background.png top curve is about 62px tall
+        let capInsets = UIEdgeInsets(top: 65, left: 0, bottom: 0, right: 0)
+        let image = UIImage(named: "Background")?.resizableImage(withCapInsets: capInsets)
+        let imageView = UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.collectionView.insertSubview(imageView, at: 0)
+        NSLayoutConstraint.activate([
+            imageView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            imageView.topAnchor.constraint(equalTo: self.collectionView.contentLayoutGuide.topAnchor, constant: 268),
+            imageView.widthAnchor.constraint(equalTo: self.collectionView.widthAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: 714)
+        ])
+        self.backgroundImageView = imageView
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        guard let view = self.backgroundImageView else { return }
+        self.collectionView.sendSubviewToBack(view)
     }
 
     // MARK: UICollectionViewController
