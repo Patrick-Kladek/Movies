@@ -17,7 +17,7 @@ struct MoviesViewModel {
     let staffPicks: Movies
 
     init() throws {
-        self.favorites = try Self.loadMovies(named: "movies")
+        self.favorites = try Array(Self.loadMovies(named: "movies")[0...2])
         self.staffPicks = try Self.loadMovies(named: "staff_picks")
     }
 }

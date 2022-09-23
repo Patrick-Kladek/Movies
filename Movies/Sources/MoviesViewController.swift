@@ -5,18 +5,22 @@
 //  Created by Patrick Kladek on 16.09.22.
 //
 
+import os.log
 import UIKit
 
 class MoviesViewController: UICollectionViewController {
 
-    private var backgroundImageView: UIImageView?
+    typealias Dependencies = HasNetworkManager
 
-    let viewModel: MoviesViewModel
+    private let viewModel: MoviesViewModel
+    private let dependencies: Dependencies
+    private var backgroundImageView: UIImageView?
 
     // MARK: - Private
 
-    init(viewModel: MoviesViewModel) {
+    init(viewModel: MoviesViewModel, dependencies: Dependencies) {
         self.viewModel = viewModel
+        self.dependencies = dependencies
         let layout = Self.makeLayout()
         super.init(collectionViewLayout: layout)
     }
@@ -92,23 +96,25 @@ class MoviesViewController: UICollectionViewController {
             let movie = self.viewModel.favorites[indexPath.row]
 
             if movie.image == nil {
-                let request = URLRequest(url: URL(string: movie.posterURL)!)
-                let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                    guard let data = data else { return }
-
-                    let image = UIImage(data: data)
-                    movie.image = image
-                    DispatchQueue.main.async {
-                        cell.image = image
+                cell.backgroundColor = .quaternarySystemFill
+                self.dependencies.networkManager.loadThumbnail(for: movie) { result in
+                    switch result {
+                    case .failure(let error):
+                        // We show placeholder image for unavailable image, need ome from designer.
+                        Logger.moviesViewController.error("Failed to load thumbnail: \(error.localizedDescription)")
+                    case .success(let image):
+                        DispatchQueue.main.async {
+                            cell.image = image
+                        }
                     }
                 }
-                task.resume()
+            } else {
+                cell.image = movie.image
             }
-            cell.backgroundColor = .quaternarySystemFill
             return cell
         case 2:
             let cell: MovieCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-            cell.backgroundColor = .blue
+            cell.backgroundColor = .quaternarySystemFill
             return cell
         default:
             fatalError("Missing Cell for CollectionView Section")

@@ -24,6 +24,9 @@
 		CDEB57DA28DCBC2200F0CBC9 /* UIFont+Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEB57D928DCBC2200F0CBC9 /* UIFont+Weight.swift */; };
 		CDEB57DC28DCEBB900F0CBC9 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEB57DB28DCEBB900F0CBC9 /* TextStyle.swift */; };
 		CDEB57DE28DCEF4200F0CBC9 /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEB57DD28DCEF4200F0CBC9 /* PosterCell.swift */; };
+		CDEB57E028DCF97300F0CBC9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEB57DF28DCF97300F0CBC9 /* NetworkManager.swift */; };
+		CDEB57E228DCF9F900F0CBC9 /* Logger+Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEB57E128DCF9F900F0CBC9 /* Logger+Movie.swift */; };
+		CDEB57E428DCFF0700F0CBC9 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEB57E328DCFF0700F0CBC9 /* Dependencies.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		CDEB57D928DCBC2200F0CBC9 /* UIFont+Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Weight.swift"; sourceTree = "<group>"; };
 		CDEB57DB28DCEBB900F0CBC9 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
 		CDEB57DD28DCEF4200F0CBC9 /* PosterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
+		CDEB57DF28DCF97300F0CBC9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		CDEB57E128DCF9F900F0CBC9 /* Logger+Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+Movie.swift"; sourceTree = "<group>"; };
+		CDEB57E328DCFF0700F0CBC9 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +118,8 @@
 				CDA3E29728D4D7ED003E3278 /* AppDelegate.swift */,
 				CDA3E29928D4D7ED003E3278 /* SceneDelegate.swift */,
 				CDA3E29B28D4D7ED003E3278 /* MoviesViewController.swift */,
+				CDEB57E328DCFF0700F0CBC9 /* Dependencies.swift */,
+				CDEB57DF28DCF97300F0CBC9 /* NetworkManager.swift */,
 				CDEB57D428DCB30000F0CBC9 /* HeaderCell.swift */,
 				CDA3E2BC28D4FAF0003E3278 /* MovieCell.swift */,
 				CDEB57DD28DCEF4200F0CBC9 /* PosterCell.swift */,
@@ -134,6 +142,7 @@
 		CDEB57D628DCB70400F0CBC9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CDEB57E128DCF9F900F0CBC9 /* Logger+Movie.swift */,
 				CDEB57D728DCB71800F0CBC9 /* String+Formatting.swift */,
 				CDEB57D928DCBC2200F0CBC9 /* UIFont+Weight.swift */,
 			);
@@ -220,12 +229,15 @@
 				CDA3E29C28D4D7ED003E3278 /* MoviesViewController.swift in Sources */,
 				CDEB57DA28DCBC2200F0CBC9 /* UIFont+Weight.swift in Sources */,
 				CDEB57D328DCADC200F0CBC9 /* SearchCell.swift in Sources */,
+				CDEB57E428DCFF0700F0CBC9 /* Dependencies.swift in Sources */,
 				CDA3E29828D4D7ED003E3278 /* AppDelegate.swift in Sources */,
 				CDEB57DE28DCEF4200F0CBC9 /* PosterCell.swift in Sources */,
 				CDA3E2BD28D4FAF0003E3278 /* MovieCell.swift in Sources */,
 				CDEB57D528DCB30000F0CBC9 /* HeaderCell.swift in Sources */,
 				CDA3E29A28D4D7ED003E3278 /* SceneDelegate.swift in Sources */,
 				CDA3E2B328D4ED6B003E3278 /* Model.swift in Sources */,
+				CDEB57E228DCF9F900F0CBC9 /* Logger+Movie.swift in Sources */,
+				CDEB57E028DCF97300F0CBC9 /* NetworkManager.swift in Sources */,
 				CDA3E2B528D4ED8D003E3278 /* MoviesViewModel.swift in Sources */,
 				CDA3E2BF28D4FB15003E3278 /* Reusable.swift in Sources */,
 				CDEB57D828DCB71800F0CBC9 /* String+Formatting.swift in Sources */,

@@ -22,6 +22,14 @@ final class PosterCell: UICollectionViewCell, Reusable {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - UICollectionViewCell
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        self.imageView.image = nil
+    }
+
     // MARK: - PosterCell
 
     var image: UIImage? {

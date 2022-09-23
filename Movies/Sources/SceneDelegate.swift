@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    let dependencies = GlobalDependencies()
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -22,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         do {
             let viewModel = try MoviesViewModel()
-            window.rootViewController = MoviesViewController(viewModel: viewModel)
+            window.rootViewController = MoviesViewController(viewModel: viewModel, dependencies: self.dependencies)
             window.makeKeyAndVisible()
         } catch LoadingError.fileMissing(let name) {
             fatalError("Could not load movies with name: \(name). Check Build Pipeline")
