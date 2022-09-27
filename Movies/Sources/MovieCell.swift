@@ -84,8 +84,6 @@ private extension MovieCell {
         return view
     }
 
-
-
     func setup() {
         self.addSubview(self.imageView)
         NSLayoutConstraint.activate([
@@ -99,7 +97,7 @@ private extension MovieCell {
         self.addSubview(self.titleLabel)
         NSLayoutConstraint.activate([
             self.titleLabel.centerYAnchor.constraint(equalTo: self.imageView.centerYAnchor),
-            self.titleLabel.leadingAnchor.constraint(equalTo: self.imageView.trailingAnchor, constant: 26),
+            self.titleLabel.leadingAnchor.constraint(equalTo: self.imageView.trailingAnchor, constant: 26)
         ])
 
         self.addSubview(self.subtitleLabel)

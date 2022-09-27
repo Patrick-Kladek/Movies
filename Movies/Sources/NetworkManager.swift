@@ -33,7 +33,7 @@ final class NetworkManager {
         }
 
         let request = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
             if let error {
                 Logger.networkManager.error("Failed downloading poster with error: \(error.localizedDescription)")
                 completion(.failure(error))

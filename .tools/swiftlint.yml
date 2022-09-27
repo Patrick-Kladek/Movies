@@ -8,7 +8,6 @@ disabled_rules:
   - inclusive_language
   - identifier_name
 opt_in_rules:
-  - nslocalizedstring_require_bundle
   - weak_delegate
 # Excluded files
 excluded:

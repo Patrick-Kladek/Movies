@@ -12,7 +12,7 @@ final class HeaderCell: UICollectionReusableView, Reusable {
     private let label = UILabel()
 
     // MARK: - Lifecycle
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setup()

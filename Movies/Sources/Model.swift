@@ -9,6 +9,7 @@
 // To parse the JSON, add this file to your project and do:
 //
 //   let movies = try? newJSONDecoder().decode(Movies.self, from: jsonData)
+// swiftlint:disable all
 
 import Foundation
 

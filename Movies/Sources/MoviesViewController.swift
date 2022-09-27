@@ -87,7 +87,7 @@ class MoviesViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.section{
+        switch indexPath.section {
         case 0:
             let cell: SearchCell = collectionView.dequeueReusableCell(indexPath: indexPath)
             return cell
@@ -118,7 +118,6 @@ class MoviesViewController: UICollectionViewController {
                     Logger.moviesViewController.error("Failed to load thumbnail: \(error.localizedDescription)")
                 }
             }
-            
             return cell
         default:
             fatalError("Missing Cell for CollectionView Section")
