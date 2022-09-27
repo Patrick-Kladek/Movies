@@ -40,6 +40,7 @@ class MoviesViewController: UICollectionViewController {
         self.collectionView.registerReusableCell(SearchCell.self)
         self.collectionView.registerReusableCell(PosterCell.self)
         self.collectionView.registerReusableCell(MovieCell.self)
+        self.collectionView.registerReusableCell(MoreCell.self)
         self.collectionView.registerReusableSupplementaryView(HeaderCell.self)
 
         // Background.png top curve is about 62px tall
@@ -78,7 +79,7 @@ class MoviesViewController: UICollectionViewController {
         case 0:
             return 1
         case 1:
-            return self.viewModel.favorites.count
+            return self.viewModel.favorites.count + 1
         case 2:
             return self.viewModel.staffPicks.count
         default:
@@ -92,6 +93,11 @@ class MoviesViewController: UICollectionViewController {
             let cell: SearchCell = collectionView.dequeueReusableCell(indexPath: indexPath)
             return cell
         case 1:
+            if indexPath.row > 0, indexPath.row == self.viewModel.favorites.count {
+                let cell: MoreCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+
+                return cell
+            }
             let movie = self.viewModel.favorites[indexPath.row]
             let cell: PosterCell = collectionView.dequeueReusableCell(indexPath: indexPath)
 
@@ -238,7 +244,6 @@ private extension MoviesViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
-//        section.interGroupSpacing = 15  // TODO: reduce to zero based on design
         section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)
 
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
