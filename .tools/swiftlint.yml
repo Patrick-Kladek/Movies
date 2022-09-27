@@ -1,0 +1,26 @@
+# Disabled rules
+disabled_rules:
+  - todo
+  - type_body_length
+  - type_name
+  - orphaned_doc_comment
+  - line_length
+  - inclusive_language
+  - identifier_name
+opt_in_rules:
+  - nslocalizedstring_require_bundle
+  - weak_delegate
+# Excluded files
+excluded:
+  - Carthage
+  - fastlane
+# Customised rules
+force_cast: error
+function_body_length: 200
+file_length: 500
+force_try:
+  severity: warning
+cyclomatic_complexity:
+    ignores_case_statements: true
+vertical_whitespace:
+  max_empty_lines: 2
