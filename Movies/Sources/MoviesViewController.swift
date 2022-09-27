@@ -34,7 +34,7 @@ class MoviesViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.overrideUserInterfaceStyle = .light
+        self.overrideUserInterfaceStyle = .dark
         self.view.backgroundColor = .white
         self.collectionView.backgroundColor = .clear
         self.collectionView.registerReusableCell(SearchCell.self)

@@ -12,6 +12,7 @@ final class MovieCell: UICollectionViewCell, Reusable {
     private lazy var imageView: UIImageView = self.makeImageView()
     private lazy var titleLabel: UILabel = self.makeTitleLabel()
     private lazy var subtitleLabel: UILabel = self.makeSubtitleLabel()
+    private lazy var ratingView: RatingView = self.makeRatingView()
 
     // MARK: - Lifecycle
 
@@ -42,6 +43,7 @@ final class MovieCell: UICollectionViewCell, Reusable {
     func configure(with movie: Movie) {
         self.subtitleLabel.text = movie.releaseDate
         self.titleLabel.text = movie.title
+        self.ratingView.currentRating = Int(floor(movie.rating))
     }
 }
 
@@ -76,6 +78,13 @@ private extension MovieCell {
         return label
     }
 
+    func makeRatingView() -> RatingView {
+        let view = RatingView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }
+
+
 
     func setup() {
         self.addSubview(self.imageView)
@@ -99,6 +108,13 @@ private extension MovieCell {
             self.subtitleLabel.bottomAnchor.constraint(equalTo: self.titleLabel.topAnchor)
         ])
 
-        self.backgroundColor = .quaternarySystemFill
+        self.addSubview(self.ratingView)
+        NSLayoutConstraint.activate([
+            self.ratingView.leadingAnchor.constraint(equalTo: self.titleLabel.leadingAnchor),
+            self.ratingView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor),
+            self.ratingView.widthAnchor.constraint(equalTo: self.ratingView.heightAnchor, multiplier: 5)
+        ])
+
+        self.backgroundColor = .clear
     }
 }

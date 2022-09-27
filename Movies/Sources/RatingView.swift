@@ -9,7 +9,11 @@ import UIKit
 
 final class RatingView: UIStackView {
 
-    let currentRating: Int = 0
+    var currentRating: Int = 0 {
+        didSet {
+            self.update()
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,10 +30,20 @@ final class RatingView: UIStackView {
 private extension RatingView {
 
     func update() {
-        let starBackgroundColor = UIColor(named: "Low Emphasis")!
-        for i in 0...5 {
-            let image = UIImage(systemName: "star.fill")?.withTintColor(starBackgroundColor)
+        self.arrangedSubviews.forEach { self.removeArrangedSubview($0)}
 
+        for i in 0..<5 {
+            let config = UIImage.SymbolConfiguration(pointSize: 12)
+            let image = UIImage(systemName: "star.fill", withConfiguration: config)
+            let imageView = UIImageView(image: image)
+            imageView.contentMode = .scaleAspectFit
+
+            if i < self.currentRating {
+                imageView.tintColor = Asset.Colors.gold.color
+            } else {
+                imageView.tintColor = Asset.Colors.lowEmphasis.color
+            }
+            self.addArrangedSubview(imageView)
         }
     }
 }
