@@ -109,6 +109,8 @@ class MoviesViewController: UICollectionViewController {
             let cell: MovieCell = collectionView.dequeueReusableCell(indexPath: indexPath)
 
             cell.configure(with: movie)
+            cell.isFavourite = AppDefaults.bookmarked.contains(movie.id)
+            cell.delegate = self
 
             Task {
                 do {
@@ -139,6 +141,23 @@ class MoviesViewController: UICollectionViewController {
         }
 
         return cell
+    }
+}
+
+// MARK: - MovieCellDelegate
+
+extension MoviesViewController: MovieCellDelegate {
+
+    func movieCellBookmarkChanged(_ cell: MovieCell) {
+        guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
+        guard indexPath.section == 2 else { return }
+
+        let movie = self.viewModel.staffPicks[indexPath.row]
+        if cell.isFavourite {
+            AppDefaults.bookmarked.append(movie.id)
+        } else {
+            AppDefaults.bookmarked.removeAll { movie.id == $0 }
+        }
     }
 }
 
@@ -227,7 +246,7 @@ private extension MoviesViewController {
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                  elementKind: UICollectionView.elementKindSectionHeader,
                                                                  alignment: .top)
-        header.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0)
+        header.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
         section.boundarySupplementaryItems = [header]
 
         return section

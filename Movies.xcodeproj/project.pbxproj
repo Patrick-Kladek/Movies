@@ -10,6 +10,10 @@
 		CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89CA28E35311002EB75D /* RatingView.swift */; };
 		CD7D89DB28E35C56002EB75D /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */; };
 		CD7D89DD28E3618F002EB75D /* Notes.md in Resources */ = {isa = PBXBuildFile; fileRef = CD7D89DC28E3618F002EB75D /* Notes.md */; };
+		CD7D89E028E370F8002EB75D /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89DF28E370F8002EB75D /* UserDefault.swift */; };
+		CD7D89E428E37120002EB75D /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89E328E37120002EB75D /* Optional.swift */; };
+		CD7D89E628E37172002EB75D /* AppDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89E528E37172002EB75D /* AppDefaults.swift */; };
+		CD7D89E828E371B2002EB75D /* AnyOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89E728E371B2002EB75D /* AnyOptional.swift */; };
 		CDA3E29828D4D7ED003E3278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3E29728D4D7ED003E3278 /* AppDelegate.swift */; };
 		CDA3E29A28D4D7ED003E3278 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3E29928D4D7ED003E3278 /* SceneDelegate.swift */; };
 		CDA3E29C28D4D7ED003E3278 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3E29B28D4D7ED003E3278 /* MoviesViewController.swift */; };
@@ -36,6 +40,10 @@
 		CD7D89CA28E35311002EB75D /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
 		CD7D89DC28E3618F002EB75D /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
+		CD7D89DF28E370F8002EB75D /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		CD7D89E328E37120002EB75D /* Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
+		CD7D89E528E37172002EB75D /* AppDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDefaults.swift; sourceTree = "<group>"; };
+		CD7D89E728E371B2002EB75D /* AnyOptional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyOptional.swift; sourceTree = "<group>"; };
 		CDA3E29428D4D7ED003E3278 /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA3E29728D4D7ED003E3278 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDA3E29928D4D7ED003E3278 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +85,24 @@
 				CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		CD7D89E128E370FB002EB75D /* Property Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				CD7D89DF28E370F8002EB75D /* UserDefault.swift */,
+			);
+			path = "Property Wrapper";
+			sourceTree = "<group>";
+		};
+		CD7D89E228E3710E002EB75D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CD7D89E528E37172002EB75D /* AppDefaults.swift */,
+				CDA3E2B428D4ED8D003E3278 /* MoviesViewModel.swift */,
+				CDA3E2B228D4ED6B003E3278 /* Model.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		CDA3E28B28D4D7ED003E3278 = {
@@ -133,6 +159,7 @@
 			children = (
 				CDA3E29728D4D7ED003E3278 /* AppDelegate.swift */,
 				CDA3E29928D4D7ED003E3278 /* SceneDelegate.swift */,
+				CD7D89E128E370FB002EB75D /* Property Wrapper */,
 				CDA3E29B28D4D7ED003E3278 /* MoviesViewController.swift */,
 				CDEB57E328DCFF0700F0CBC9 /* Dependencies.swift */,
 				CDEB57DF28DCF97300F0CBC9 /* NetworkManager.swift */,
@@ -142,8 +169,7 @@
 				CDEB57DD28DCEF4200F0CBC9 /* PosterCell.swift */,
 				CDEB57D228DCADC200F0CBC9 /* SearchCell.swift */,
 				CDEB57DB28DCEBB900F0CBC9 /* TextStyle.swift */,
-				CDA3E2B428D4ED8D003E3278 /* MoviesViewModel.swift */,
-				CDA3E2B228D4ED6B003E3278 /* Model.swift */,
+				CD7D89E228E3710E002EB75D /* Model */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -151,6 +177,7 @@
 		CDA3E2C028D4FB1C003E3278 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				CD7D89E728E371B2002EB75D /* AnyOptional.swift */,
 				CDA3E2BE28D4FB15003E3278 /* Reusable.swift */,
 			);
 			path = Protocols;
@@ -159,6 +186,7 @@
 		CDEB57D628DCB70400F0CBC9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CD7D89E328E37120002EB75D /* Optional.swift */,
 				CDEB57E128DCF9F900F0CBC9 /* Logger+Movie.swift */,
 				CDEB57D728DCB71800F0CBC9 /* String+Formatting.swift */,
 				CDEB57D928DCBC2200F0CBC9 /* UIFont+Weight.swift */,
@@ -298,11 +326,15 @@
 				CDEB57D528DCB30000F0CBC9 /* HeaderCell.swift in Sources */,
 				CD7D89DB28E35C56002EB75D /* XCAssets+Generated.swift in Sources */,
 				CDA3E29A28D4D7ED003E3278 /* SceneDelegate.swift in Sources */,
+				CD7D89E428E37120002EB75D /* Optional.swift in Sources */,
 				CDA3E2B328D4ED6B003E3278 /* Model.swift in Sources */,
 				CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */,
+				CD7D89E628E37172002EB75D /* AppDefaults.swift in Sources */,
 				CDEB57E228DCF9F900F0CBC9 /* Logger+Movie.swift in Sources */,
 				CDEB57E028DCF97300F0CBC9 /* NetworkManager.swift in Sources */,
 				CDA3E2B528D4ED8D003E3278 /* MoviesViewModel.swift in Sources */,
+				CD7D89E828E371B2002EB75D /* AnyOptional.swift in Sources */,
+				CD7D89E028E370F8002EB75D /* UserDefault.swift in Sources */,
 				CDA3E2BF28D4FB15003E3278 /* Reusable.swift in Sources */,
 				CDEB57D828DCB71800F0CBC9 /* String+Formatting.swift in Sources */,
 			);

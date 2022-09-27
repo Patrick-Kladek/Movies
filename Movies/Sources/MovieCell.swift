@@ -7,12 +7,19 @@
 
 import UIKit
 
+protocol MovieCellDelegate: AnyObject {
+    func movieCellBookmarkChanged(_ cell: MovieCell)
+}
+
 final class MovieCell: UICollectionViewCell, Reusable {
 
     private lazy var imageView: UIImageView = self.makeImageView()
     private lazy var titleLabel: UILabel = self.makeTitleLabel()
     private lazy var subtitleLabel: UILabel = self.makeSubtitleLabel()
     private lazy var ratingView: RatingView = self.makeRatingView()
+    private lazy var bookmarkButton: UIButton = self.makeBookmarkButton()
+
+    weak var delegate: MovieCellDelegate?
 
     // MARK: - Lifecycle
 
@@ -40,6 +47,11 @@ final class MovieCell: UICollectionViewCell, Reusable {
         set { self.imageView.image = newValue }
     }
 
+    var isFavourite: Bool {
+        get { self.bookmarkButton.isSelected }
+        set { self.bookmarkButton.isSelected = newValue }
+    }
+
     func configure(with movie: Movie) {
         self.subtitleLabel.text = movie.releaseDate
         self.titleLabel.text = movie.title
@@ -56,7 +68,7 @@ private extension MovieCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 14
+        imageView.layer.cornerRadius = 10
         return imageView
     }
 
@@ -82,6 +94,15 @@ private extension MovieCell {
         let view = RatingView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }
+
+    func makeBookmarkButton() -> UIButton {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(Asset.Images.bookmarkSelected.image, for: .selected)
+        button.setImage(Asset.Images.bookmark.image, for: .normal)
+        button.addTarget(self, action: #selector(bookmarkTapped), for: .touchUpInside)
+        return button
     }
 
     func setup() {
@@ -113,6 +134,19 @@ private extension MovieCell {
             self.ratingView.widthAnchor.constraint(equalTo: self.ratingView.heightAnchor, multiplier: 5)
         ])
 
+        self.addSubview(self.bookmarkButton)
+        NSLayoutConstraint.activate([
+            self.bookmarkButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            self.bookmarkButton.heightAnchor.constraint(equalToConstant: 19),
+            self.bookmarkButton.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
+
         self.backgroundColor = .clear
+    }
+
+    @objc
+    func bookmarkTapped(_ button: UIButton) {
+        button.isSelected.toggle()
+        self.delegate?.movieCellBookmarkChanged(self)
     }
 }
