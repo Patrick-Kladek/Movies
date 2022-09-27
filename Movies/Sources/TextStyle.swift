@@ -19,10 +19,13 @@ enum TextStyle {
     case detailSecondary
     case caption
 
+    // We can't specify SF Pro directly:
+    // We either get a warning in console and fallback to Times New Roman
+    // Or use the systemFont which might change with iOS Version
     var font: UIFont {
-        let defaultFont = UIFont(name: "SF Pro", size: self.defaultFontSize)!
+        let defaultFont = UIFont.systemFont(ofSize: self.defaultFontSize)
 
-        return defaultFont.weight(self.defaultFontWeight)
+        return defaultFont.weight(self.defaultFontWeight).scaled()
     }
 }
 

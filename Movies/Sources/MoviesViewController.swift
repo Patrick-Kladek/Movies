@@ -92,29 +92,33 @@ class MoviesViewController: UICollectionViewController {
             let cell: SearchCell = collectionView.dequeueReusableCell(indexPath: indexPath)
             return cell
         case 1:
-            let cell: PosterCell = collectionView.dequeueReusableCell(indexPath: indexPath)
             let movie = self.viewModel.favorites[indexPath.row]
+            let cell: PosterCell = collectionView.dequeueReusableCell(indexPath: indexPath)
 
-            if movie.image == nil {
-                cell.backgroundColor = .quaternarySystemFill
-                self.dependencies.networkManager.loadThumbnail(for: movie) { result in
-                    switch result {
-                    case .failure(let error):
-                        // We show placeholder image for unavailable image, need ome from designer.
-                        Logger.moviesViewController.error("Failed to load thumbnail: \(error.localizedDescription)")
-                    case .success(let image):
-                        DispatchQueue.main.async {
-                            cell.image = image
-                        }
-                    }
+            Task {
+                do {
+                    let image = try await self.dependencies.networkManager.loadThumbnail(for: movie)
+                    cell.image = image
+                } catch {
+                    Logger.moviesViewController.error("Failed to load thumbnail: \(error.localizedDescription)")
                 }
-            } else {
-                cell.image = movie.image
             }
             return cell
         case 2:
+            let movie = self.viewModel.staffPicks[indexPath.row]
             let cell: MovieCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-            cell.backgroundColor = .quaternarySystemFill
+
+            cell.configure(with: movie)
+
+            Task {
+                do {
+                    let image = try await self.dependencies.networkManager.loadThumbnail(for: movie)
+                    cell.image = image
+                } catch {
+                    Logger.moviesViewController.error("Failed to load thumbnail: \(error.localizedDescription)")
+                }
+            }
+            
             return cell
         default:
             fatalError("Missing Cell for CollectionView Section")
@@ -211,20 +215,20 @@ private extension MoviesViewController {
                                               heightDimension: .estimated(estimatedHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let groupFractionalWidth = 1.0
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(groupFractionalWidth),
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                heightDimension: .estimated(estimatedHeight))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 15  // TODO: reduce to zero based on design
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20)
+//        section.interGroupSpacing = 15  // TODO: reduce to zero based on design
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)
 
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                 heightDimension: .estimated(20.0))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                  elementKind: UICollectionView.elementKindSectionHeader,
                                                                  alignment: .top)
+        header.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0)
         section.boundarySupplementaryItems = [header]
 
         return section

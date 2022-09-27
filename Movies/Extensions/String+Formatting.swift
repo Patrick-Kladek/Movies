@@ -9,8 +9,7 @@ import UIKit
 
 extension String {
 
-    private static let defaultMarkupFont: UIFont? = UIFont(name: "SF Pro", size: UIFont.systemFontSize)?
-        .weight(.regular)
+    private static let defaultMarkupFont: UIFont? = UIFont.systemFont(ofSize: 12).weight(.regular)
 
     func parseMarkup(defaultFont: UIFont? = String.defaultMarkupFont) -> NSAttributedString {
         let font = defaultFont ?? UIFont.systemFont(ofSize: UIFont.systemFontSize)

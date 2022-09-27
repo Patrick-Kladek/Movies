@@ -45,13 +45,13 @@ private extension PosterCell {
     func makeImageView() -> UIImageView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 14
         return imageView
     }
 
     func setup() {
-        self.imageView.contentMode = .scaleAspectFill
-        self.imageView.clipsToBounds = true
-        self.imageView.layer.cornerRadius = 14
         self.addSubview(self.imageView)
         NSLayoutConstraint.activate([
             self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -60,11 +60,12 @@ private extension PosterCell {
             self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
 
-
         self.layer.cornerRadius = 14
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.5      // figma design uses 16% but it looks off
         self.layer.shadowOffset = .zero
         self.layer.shadowRadius = 50
+
+        self.backgroundColor = .quaternarySystemFill
     }
 }

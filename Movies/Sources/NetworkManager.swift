@@ -10,6 +10,11 @@ import os.log
 
 final class NetworkManager {
 
+    enum NetworkError: Error {
+        case missingURL
+        case invalidImageFormat
+    }
+
     static let shared = NetworkManager()
 
     private init() { }
@@ -45,5 +50,27 @@ final class NetworkManager {
             Logger.networkManager.error("Unhandled case in URLSession.dataTask")
         }
         task.resume()
+    }
+
+    func loadThumbnail(for movie: Movie) async throws -> UIImage {
+        if let image = movie.image {
+            return image
+        }
+
+        guard let url = URL(string: movie.posterURL) else {
+            Logger.networkManager.error("Invalid URL for movie: \(movie.id), url: \(movie.posterURL)")
+            throw NetworkError.missingURL
+        }
+
+        let request = URLRequest(url: url)
+        let (data, _) = try await URLSession.shared.data(for: request)
+
+        guard let image = UIImage(data: data) else {
+            Logger.networkManager.error("Invalid Image for movie: \(movie.id), data: \(data)")
+            throw NetworkError.invalidImageFormat
+        }
+
+        movie.image = image
+        return image
     }
 }
