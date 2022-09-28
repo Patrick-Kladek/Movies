@@ -48,6 +48,8 @@ private extension MoviesViewModel {
         }
 
         let data = try Data(contentsOf: url)
-        return try JSONDecoder().decode(Movies.self, from: data)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.yyyyMMdd)
+        return try decoder.decode(Movies.self, from: data)
     }
 }

@@ -18,7 +18,7 @@ class Movie: Codable {
     let rating: Double
     let id: Int
     let revenue: Int?
-    let releaseDate: String
+    let releaseDate: Date
     let director: Director
     let posterURL: String
     let cast: [Cast]

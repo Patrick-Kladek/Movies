@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD0726ED28E482C9006E8389 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726EC28E482C9006E8389 /* DateFormatter.swift */; };
 		CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89CA28E35311002EB75D /* RatingView.swift */; };
 		CD7D89DB28E35C56002EB75D /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */; };
 		CD7D89DD28E3618F002EB75D /* Notes.md in Resources */ = {isa = PBXBuildFile; fileRef = CD7D89DC28E3618F002EB75D /* Notes.md */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD0726EC28E482C9006E8389 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CD7D89CA28E35311002EB75D /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
 		CD7D89DC28E3618F002EB75D /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				CDEB57E128DCF9F900F0CBC9 /* Logger+Movie.swift */,
 				CDEB57D728DCB71800F0CBC9 /* String+Formatting.swift */,
 				CDEB57D928DCBC2200F0CBC9 /* UIFont+Weight.swift */,
+				CD0726EC28E482C9006E8389 /* DateFormatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				CDA3E29A28D4D7ED003E3278 /* SceneDelegate.swift in Sources */,
 				CD7D89E428E37120002EB75D /* Optional.swift in Sources */,
 				CDA3E2B328D4ED6B003E3278 /* Model.swift in Sources */,
+				CD0726ED28E482C9006E8389 /* DateFormatter.swift in Sources */,
 				CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */,
 				CD7D89E628E37172002EB75D /* AppDefaults.swift in Sources */,
 				CD7D89EA28E379CF002EB75D /* MoreCell.swift in Sources */,

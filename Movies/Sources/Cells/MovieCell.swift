@@ -52,8 +52,8 @@ final class MovieCell: UICollectionViewCell, Reusable {
         set { self.bookmarkButton.isSelected = newValue }
     }
 
-    func configure(with movie: Movie) {
-        self.subtitleLabel.text = movie.releaseDate
+    func configure(with movie: Movie, dateFormatter: DateFormatter) {
+        self.subtitleLabel.text = dateFormatter.string(from: movie.releaseDate)
         self.titleLabel.text = movie.title
         self.ratingView.currentRating = Int(floor(movie.rating))
     }
