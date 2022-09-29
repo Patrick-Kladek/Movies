@@ -9,7 +9,7 @@ import UIKit
 
 final class SearchCell: UICollectionViewCell, Reusable {
 
-    private let imageView = UIImageView()
+    private lazy var imageView = self.makeImageView()
 
     // MARK: - Lifecycle
 
@@ -27,6 +27,14 @@ final class SearchCell: UICollectionViewCell, Reusable {
 
 private extension SearchCell {
 
+    func makeImageView() -> UIImageView {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.tintColor = UIColor.black.withAlphaComponent(0.6)
+        imageView.image = UIImage(named: "Search")
+        return imageView
+    }
+
     func setup() {
         self.backgroundColor = .white
         self.layer.cornerRadius = 12
@@ -35,15 +43,12 @@ private extension SearchCell {
         self.layer.shadowOffset = .zero
         self.layer.shadowRadius = 30
 
-        self.imageView.tintColor = UIColor.black.withAlphaComponent(0.6)
-        self.imageView.image = UIImage(named: "Search")
-        self.addSubview(self.imageView)
-        self.imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(self.imageView)
         NSLayoutConstraint.activate([
             self.imageView.heightAnchor.constraint(equalToConstant: 20),
             self.imageView.widthAnchor.constraint(equalTo: self.imageView.heightAnchor),
-            self.centerXAnchor.constraint(equalTo: self.imageView.centerXAnchor),
-            self.centerYAnchor.constraint(equalTo: self.imageView.centerYAnchor)
+            self.contentView.centerXAnchor.constraint(equalTo: self.imageView.centerXAnchor),
+            self.contentView.centerYAnchor.constraint(equalTo: self.imageView.centerYAnchor)
         ])
     }
 }

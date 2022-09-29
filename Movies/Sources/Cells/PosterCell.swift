@@ -52,12 +52,12 @@ private extension PosterCell {
     }
 
     func setup() {
-        self.addSubview(self.imageView)
+        self.contentView.addSubview(self.imageView)
         NSLayoutConstraint.activate([
-            self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.imageView.topAnchor.constraint(equalTo: self.topAnchor),
-            self.imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            self.imageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            self.imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            self.imageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            self.imageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
 
         self.layer.cornerRadius = 14

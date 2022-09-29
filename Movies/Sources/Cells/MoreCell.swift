@@ -74,10 +74,10 @@ private extension MoreCell {
     }
 
     func setup() {
-        self.addSubview(self.button)
+        self.contentView.addSubview(self.button)
         NSLayoutConstraint.activate([
-            self.button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            self.button.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            self.button.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            self.button.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
         ])
 
 //        self.backgroundColor = .quateßrnarySystemFill

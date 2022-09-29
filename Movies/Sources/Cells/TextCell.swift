@@ -36,19 +36,19 @@ private extension TextCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontForContentSizeCategory = true
-        label.font = TextStyle.bodySecondary.font
+        label.font = TextStyle.body.font
+        label.textColor = Asset.Colors.mediumEmphasis.color
+        label.numberOfLines = 0
         return label
     }
 
     func setup() {
-        self.addSubview(self.label)
+        self.contentView.addSubview(self.label)
         NSLayoutConstraint.activate([
-            self.label.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.label.topAnchor.constraint(equalTo: self.topAnchor),
-            self.label.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.label.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            self.label.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            self.label.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            self.label.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            self.label.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
-
-        self.backgroundColor = .quaternarySystemFill
     }
 }

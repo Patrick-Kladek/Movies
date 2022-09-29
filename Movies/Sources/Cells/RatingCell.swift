@@ -42,15 +42,12 @@ private extension RatingCell {
     }
 
     func setup() {
-        self.addSubview(self.ratingView)
+        self.contentView.addSubview(self.ratingView)
         NSLayoutConstraint.activate([
-            self.ratingView.topAnchor.constraint(equalTo: self.topAnchor),
-            self.ratingView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            self.ratingView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-
+            self.ratingView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            self.ratingView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            self.ratingView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
             self.ratingView.widthAnchor.constraint(equalTo: self.ratingView.heightAnchor, multiplier: 5)
         ])
-
-        self.backgroundColor = .clear
     }
 }

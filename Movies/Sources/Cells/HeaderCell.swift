@@ -24,9 +24,14 @@ final class HeaderCell: UICollectionReusableView, Reusable {
 
     // MARK: - HeaderCell
 
-    var attributedTitle: NSAttributedString? {
+    var attributedText: NSAttributedString? {
         get { self.label.attributedText }
         set { self.label.attributedText = newValue }
+    }
+
+    var text: String? {
+        get { self.label.text }
+        set { self.label.text = newValue }
     }
 
     var textColor: UIColor {
