@@ -145,10 +145,10 @@ class MoviesViewController: UICollectionViewController {
 
         switch indexPath.section {
         case 1:
-            cell.attributedTitle = NSLocalizedString("YOUR *FAVORITES*", comment: "Label. Short. Home-Screen. Title for Favourites Section").parseMarkup()
+            cell.attributedText = NSLocalizedString("YOUR *FAVORITES*", comment: "Label. Short. Home-Screen. Title for Favourites Section").parseMarkup()
             cell.textColor = .black
         case 2:
-            cell.attributedTitle = NSLocalizedString("OUR *STAFF PICKS*", comment: "Label. Short. Home-Screen. Title for Favourites Section").parseMarkup()
+            cell.attributedText = NSLocalizedString("OUR *STAFF PICKS*", comment: "Label. Short. Home-Screen. Title for Favourites Section").parseMarkup()
             cell.textColor = .white
         default:
             break

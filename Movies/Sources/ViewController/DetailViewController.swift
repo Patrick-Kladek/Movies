@@ -34,7 +34,6 @@ final class DetailViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         self.title = self.movie.title
 
         // NOTE: Workaround so UICollectionViewCompositionalLayout can access the dataSource
@@ -48,8 +47,7 @@ final class DetailViewController: UICollectionViewController {
         self.collectionView.registerReusableCell(RatingCell.self)
         self.collectionView.registerReusableCell(TextCell.self)
         self.collectionView.registerReusableCell(PlaceholderCell.self)
-
-
+        self.collectionView.registerReusableSupplementaryView(HeaderCell.self)
     }
 
     // MARK: - UICollectionViewController
@@ -65,8 +63,10 @@ final class DetailViewController: UICollectionViewController {
         case 2:
             return self.movie.genres.count
         case 3:
-            return self.movie.cast.count
+            return 1
         case 4:
+            return self.movie.cast.count
+        case 5:
             return self.movie.revenue == nil ? 3 : 4
         default:
             return 0
@@ -88,11 +88,32 @@ final class DetailViewController: UICollectionViewController {
             let cell: GenreCell = collectionView.dequeueReusableCell(indexPath: indexPath)
             cell.label.text = self.movie.genres[indexPath.row]
             return cell
+        case 3:
+            let cell: TextCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+            cell.label.text = self.movie.overview
+            return cell
         default:
             let cell: PlaceholderCell = collectionView.dequeueReusableCell(indexPath: indexPath)
             return cell
         }
 
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let cell: HeaderCell = collectionView.dequeueReusableSupplementaryView(indexPath: indexPath)
+
+        switch indexPath.section {
+        case 3:
+            cell.text = NSLocalizedString("Overview", comment: "Label. Short. Home-Screen. Title for Favourites Section")
+            cell.textColor = Asset.Colors.highEmphasis.color
+        case 4:
+            cell.text = NSLocalizedString("OUR *STAFF PICKS*", comment: "Label. Short. Home-Screen. Title for Favourites Section")
+            cell.textColor = Asset.Colors.highEmphasis.color
+        default:
+            break
+        }
+
+        return cell
     }
 
     // MARK: - DetailViewController
@@ -112,7 +133,8 @@ private extension DetailViewController {
             case 2:
                 return self.makeGenreSection(layoutEnvironment: layoutEnvironment)
             case 3:
-                return Self.makeTitleSection(layoutEnvironment: layoutEnvironment)
+                return self.makeOverViewSection(layoutEnvironment: layoutEnvironment)
+
             case 4:
                 return Self.makeDirectorSection(layoutEnvironment: layoutEnvironment)
             case 5:
@@ -162,7 +184,6 @@ private extension DetailViewController {
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
 
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 19, leading: 0, bottom: 0, trailing: 0)
 
         return section
@@ -180,10 +201,31 @@ private extension DetailViewController {
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
 
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 20, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 47, trailing: 0)
         return section
     }
 
+    func makeOverViewSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .estimated(100))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(100))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 20, bottom: 0, trailing: 20)
+
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                heightDimension: .estimated(20.0))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                 elementKind: UICollectionView.elementKindSectionHeader,
+                                                                 alignment: .top)
+        section.boundarySupplementaryItems = [header]
+
+        return section
+    }
 
 
 
