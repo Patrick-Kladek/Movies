@@ -38,6 +38,23 @@ extension Movie {
     }
 }
 
+// MARK: - Director
+
+private var associateDirectorImageKey: Void?
+
+extension Director {
+
+    var image: UIImage? {
+        get {
+            return objc_getAssociatedObject(self, &associateDirectorImageKey) as? UIImage
+        }
+        set {
+            objc_setAssociatedObject(self, &associateDirectorImageKey, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+}
+
+
 // MARK: - Private
 
 private extension MoviesViewModel {

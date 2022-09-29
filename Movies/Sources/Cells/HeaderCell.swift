@@ -9,7 +9,7 @@ import UIKit
 
 final class HeaderCell: UICollectionReusableView, Reusable {
 
-    private let label = UILabel()
+    private let label = HeaderCell.makeLabel()
 
     // MARK: - Lifecycle
 
@@ -39,6 +39,11 @@ final class HeaderCell: UICollectionReusableView, Reusable {
         set { self.label.textColor = newValue }
     }
 
+    var font: UIFont {
+        get { self.label.font }
+        set { self.label.font = newValue }
+    }
+
     // MARK: - Reusable
 
     static var supplementaryViewOfKind: SupplementaryType? {
@@ -50,9 +55,14 @@ final class HeaderCell: UICollectionReusableView, Reusable {
 
 private extension HeaderCell {
 
+    static func makeLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }
+
     func setup() {
-        self.label.translatesAutoresizingMaskIntoConstraints = false
-        self.label.adjustsFontForContentSizeCategory = true
         self.addSubview(self.label)
         NSLayoutConstraint.activate([
             self.label.leadingAnchor.constraint(equalTo: self.leadingAnchor),

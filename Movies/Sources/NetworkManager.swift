@@ -73,4 +73,26 @@ final class NetworkManager {
         movie.image = image
         return image
     }
+
+    func loadThumbnail(for director: Director) async throws -> UIImage {
+        if let image = director.image {
+            return image
+        }
+
+        guard let url = URL(string: director.pictureURL) else {
+            Logger.networkManager.error("Invalid URL for director: \(director.name), url: \(director.pictureURL)")
+            throw NetworkError.missingURL
+        }
+
+        let request = URLRequest(url: url)
+        let (data, _) = try await URLSession.shared.data(for: request)
+
+        guard let image = UIImage(data: data) else {
+            Logger.networkManager.error("Invalid Image for director: \(director.name), data: \(data)")
+            throw NetworkError.invalidImageFormat
+        }
+
+        director.image = image
+        return image
+    }
 }

@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import os.log
 
 final class DetailViewController: UICollectionViewController {
 
+    typealias Dependencies = HasNetworkManager
+
     private let movie: Movie
+    private let dependencies: Dependencies
 
 //    private lazy var layout: UICollectionViewLayout = self.makeLayout()
     private lazy var dateFormatter: DateFormatter = self.makeDateFormatter()
@@ -18,8 +22,9 @@ final class DetailViewController: UICollectionViewController {
 
     // MARK: - Lifecycle
 
-    init(movie: Movie) {
+    init(movie: Movie, dependencies: Dependencies) {
         self.movie = movie
+        self.dependencies = dependencies
 
         // NOTE: Workaround, see viewDidLoad for explaination
         super.init(collectionViewLayout: .init())
@@ -46,6 +51,7 @@ final class DetailViewController: UICollectionViewController {
         self.collectionView.registerReusableCell(GenreCell.self)
         self.collectionView.registerReusableCell(RatingCell.self)
         self.collectionView.registerReusableCell(TextCell.self)
+        self.collectionView.registerReusableCell(PersonCell.self)
         self.collectionView.registerReusableCell(PlaceholderCell.self)
         self.collectionView.registerReusableSupplementaryView(HeaderCell.self)
     }
@@ -65,8 +71,10 @@ final class DetailViewController: UICollectionViewController {
         case 3:
             return 1
         case 4:
-            return self.movie.cast.count
+            return 1
         case 5:
+            return self.movie.cast.count
+        case 6:
             return self.movie.revenue == nil ? 3 : 4
         default:
             return 0
@@ -92,6 +100,19 @@ final class DetailViewController: UICollectionViewController {
             let cell: TextCell = collectionView.dequeueReusableCell(indexPath: indexPath)
             cell.label.text = self.movie.overview
             return cell
+        case 4:
+            let cell: PersonCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+            cell.title = self.movie.director.name
+            Task {
+                do {
+                    let image = try await self.dependencies.networkManager.loadThumbnail(for: movie.director)
+                    cell.image = image
+                } catch {
+                    Logger.moviesViewController.error("Failed to load thumbnail: \(error.localizedDescription)")
+                }
+            }
+            return cell
+
         default:
             let cell: PlaceholderCell = collectionView.dequeueReusableCell(indexPath: indexPath)
             return cell
@@ -104,11 +125,21 @@ final class DetailViewController: UICollectionViewController {
 
         switch indexPath.section {
         case 3:
-            cell.text = NSLocalizedString("Overview", comment: "Label. Short. Home-Screen. Title for Favourites Section")
+            cell.text = NSLocalizedString("Overview", comment: "Label. Short. Detail-Screen. Header for Movie Description")
             cell.textColor = Asset.Colors.highEmphasis.color
+            cell.font = TextStyle.bodyTitle.font
         case 4:
-            cell.text = NSLocalizedString("OUR *STAFF PICKS*", comment: "Label. Short. Home-Screen. Title for Favourites Section")
+            cell.text = NSLocalizedString("Director", comment: "Label. Short. Detail-Screen. Header for Director Section")
             cell.textColor = Asset.Colors.highEmphasis.color
+            cell.font = TextStyle.bodyTitle.font
+        case 5:
+            cell.text = NSLocalizedString("Actors", comment: "Label. Short. Detail-Screen. Header for Actors Section")
+            cell.textColor = Asset.Colors.highEmphasis.color
+            cell.font = TextStyle.bodyTitle.font
+        case 6:
+            cell.text = NSLocalizedString("Key Facts", comment: "Label. Short. Detail-Screen. Header for Key Facts Section")
+            cell.textColor = Asset.Colors.highEmphasis.color
+            cell.font = TextStyle.bodyTitle.font
         default:
             break
         }
@@ -134,9 +165,9 @@ private extension DetailViewController {
                 return self.makeGenreSection(layoutEnvironment: layoutEnvironment)
             case 3:
                 return self.makeOverViewSection(layoutEnvironment: layoutEnvironment)
-
             case 4:
-                return Self.makeDirectorSection(layoutEnvironment: layoutEnvironment)
+                return self.makeDirectorSection(layoutEnvironment: layoutEnvironment)
+
             case 5:
                 return Self.makeActorsSection(layoutEnvironment: layoutEnvironment)
             case 6:
@@ -215,116 +246,42 @@ private extension DetailViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 20, bottom: 0, trailing: 20)
-
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                heightDimension: .estimated(20.0))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
-                                                                 elementKind: UICollectionView.elementKindSectionHeader,
-                                                                 alignment: .top)
-        section.boundarySupplementaryItems = [header]
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 20, bottom: 30, trailing: 20)
+        section.boundarySupplementaryItems = [self.makeHeader()]
 
         return section
     }
 
-
-
-
-
-    static func makeGenreSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let estimatedHeight: CGFloat = 20
-
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(50),
-                                              heightDimension: .estimated(estimatedHeight))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.edgeSpacing = .init(leading: .flexible(10), top: nil, trailing: .flexible(10), bottom: nil)
-
-        // if we have the space, adapt and go 2-up + peeking 3rd item
-        let groupFractionalWidth = CGFloat(layoutEnvironment.container.effectiveContentSize.width > 500 ? 0.425 : 0.85)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(groupFractionalWidth),
-                                               heightDimension: .estimated(estimatedHeight))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.edgeSpacing = .init(leading: .flexible(10), top: nil, trailing: .flexible(10), bottom: nil)
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPagingCentered
-        section.interGroupSpacing = 11
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
-
-        return section
-    }
-
-    static func makeReleaseDateSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100),
-                                              heightDimension: .fractionalHeight(1.0))
+    func makeDirectorSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(100),
+                                              heightDimension: .absolute(150))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .estimated(15))
+                                               heightDimension: .absolute(150))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 19, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 20, bottom: 50, trailing: 20)
+        section.boundarySupplementaryItems = [self.makeHeader()]
 
         return section
     }
 
-    static func makeTitleSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .estimated(15))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 19, leading: 0, bottom: 0, trailing: 0)
 
-        return section
-    }
 
-    static func makeOverViewSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(48),
-                                               heightDimension: .absolute(48))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 50, trailing: 20)
-
-        return section
-    }
-
-    static func makeDirectorSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(48),
-                                               heightDimension: .absolute(48))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 50, trailing: 20)
-
-        return section
-    }
 
     static func makeActorsSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(100),
+                                              heightDimension: .absolute(150))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(48),
-                                               heightDimension: .absolute(48))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .absolute(150))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
@@ -348,6 +305,15 @@ private extension DetailViewController {
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 50, trailing: 20)
 
         return section
+    }
+
+    func makeHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                heightDimension: .estimated(20.0))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                 elementKind: UICollectionView.elementKindSectionHeader,
+                                                                 alignment: .top)
+        return header
     }
 
     func makeDateFormatter() -> DateFormatter {
