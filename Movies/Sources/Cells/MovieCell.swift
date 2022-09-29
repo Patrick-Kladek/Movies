@@ -38,6 +38,10 @@ final class MovieCell: UICollectionViewCell, Reusable {
         super.prepareForReuse()
 
         self.imageView.image = nil
+        self.bookmarkButton.isSelected = false
+        self.subtitleLabel.text = ""
+        self.titleLabel.text = ""
+        self.ratingView.currentRating = 0
     }
 
     // MARK: - PosterCell
@@ -108,9 +112,9 @@ private extension MovieCell {
     func setup() {
         self.contentView.addSubview(self.imageView)
         NSLayoutConstraint.activate([
-            self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
-            self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 28),
-            self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -24),
+            self.imageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 30),
+            self.imageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 28),
+            self.imageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -24),
             self.imageView.heightAnchor.constraint(equalToConstant: 89),
             self.imageView.widthAnchor.constraint(equalToConstant: 60)
         ])
@@ -136,9 +140,9 @@ private extension MovieCell {
 
         self.contentView.addSubview(self.bookmarkButton)
         NSLayoutConstraint.activate([
-            self.bookmarkButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            self.bookmarkButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
             self.bookmarkButton.heightAnchor.constraint(equalToConstant: 19),
-            self.bookmarkButton.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            self.bookmarkButton.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
         ])
 
         self.backgroundColor = .clear

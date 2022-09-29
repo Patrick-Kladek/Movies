@@ -69,7 +69,7 @@ class MoviesViewController: UICollectionViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.collectionView(self.collectionView, didSelectItemAt: IndexPath(row: 0, section: 1))
+        self.collectionView(self.collectionView, didSelectItemAt: IndexPath(row: 1, section: 1))
     }
 
     override var prefersStatusBarHidden: Bool {

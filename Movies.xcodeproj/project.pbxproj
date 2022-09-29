@@ -12,6 +12,7 @@
 		CD0726F128E48762006E8389 /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F028E48762006E8389 /* RatingCell.swift */; };
 		CD0726F328E5BBFF006E8389 /* PlaceholderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F228E5BBFF006E8389 /* PlaceholderCell.swift */; };
 		CD0726F528E5BD00006E8389 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F428E5BD00006E8389 /* TextCell.swift */; };
+		CD0726F828E5C648006E8389 /* FactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F728E5C648006E8389 /* FactsCell.swift */; };
 		CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89CA28E35311002EB75D /* RatingView.swift */; };
 		CD7D89DB28E35C56002EB75D /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */; };
 		CD7D89DD28E3618F002EB75D /* Notes.md in Resources */ = {isa = PBXBuildFile; fileRef = CD7D89DC28E3618F002EB75D /* Notes.md */; };
@@ -49,7 +50,7 @@
 		CD0726F028E48762006E8389 /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
 		CD0726F228E5BBFF006E8389 /* PlaceholderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderCell.swift; sourceTree = "<group>"; };
 		CD0726F428E5BD00006E8389 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
-		CD0726F628E5C27D006E8389 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		CD0726F728E5C648006E8389 /* FactsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsCell.swift; sourceTree = "<group>"; };
 		CD7D89CA28E35311002EB75D /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
 		CD7D89DC28E3618F002EB75D /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
@@ -131,6 +132,7 @@
 				CD0726F028E48762006E8389 /* RatingCell.swift */,
 				CD0726F228E5BBFF006E8389 /* PlaceholderCell.swift */,
 				CD0726F428E5BD00006E8389 /* TextCell.swift */,
+				CD0726F728E5C648006E8389 /* FactsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -370,6 +372,7 @@
 				CDEB57E428DCFF0700F0CBC9 /* Dependencies.swift in Sources */,
 				CDA3E29828D4D7ED003E3278 /* AppDelegate.swift in Sources */,
 				CD0726F328E5BBFF006E8389 /* PlaceholderCell.swift in Sources */,
+				CD0726F828E5C648006E8389 /* FactsCell.swift in Sources */,
 				CDEB57DE28DCEF4200F0CBC9 /* PosterCell.swift in Sources */,
 				CDA3E2BD28D4FAF0003E3278 /* MovieCell.swift in Sources */,
 				CDEB57D528DCB30000F0CBC9 /* HeaderCell.swift in Sources */,

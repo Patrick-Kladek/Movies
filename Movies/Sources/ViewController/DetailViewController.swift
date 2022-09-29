@@ -12,7 +12,8 @@ final class DetailViewController: UICollectionViewController {
     private let movie: Movie
 
     private lazy var dateFormatter: DateFormatter = self.makeDateFormatter()
-    private lazy var timeFormatter: RelativeDateTimeFormatter = self.makeTimeFormatter()
+    private lazy var yearFormatter: DateFormatter = self.makeYearFormatter()
+    private lazy var timeFormatter: DateComponentsFormatter = self.makeTimeFormatter()
 
     // MARK: - Lifecycle
 
@@ -30,11 +31,20 @@ final class DetailViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.overrideUserInterfaceStyle = .light
         self.collectionView.registerReusableCell(PosterCell.self)
+        self.collectionView.registerReusableCell(FactsCell.self)
         self.collectionView.registerReusableCell(RatingCell.self)
         self.collectionView.registerReusableCell(TextCell.self)
         self.collectionView.registerReusableCell(PlaceholderCell.self)
         self.title = self.movie.title
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        print(#function)
+        self.collectionView.collectionViewLayout.invalidateLayout()
     }
 
     // MARK: - UICollectionViewController
@@ -45,8 +55,10 @@ final class DetailViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case 0...2:
+        case 0...1:
             return 1
+        case 2:
+            return self.movie.genres.count
         case 3:
             return self.movie.cast.count
         case 4:
@@ -63,14 +75,12 @@ final class DetailViewController: UICollectionViewController {
             cell.backgroundColor = .quaternarySystemFill
             return cell
         case 1:
-            let cell: RatingCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-            cell.backgroundColor = .quaternarySystemFill
+            let cell: FactsCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+            cell.configure(with: self.movie, dateFormatter: self.dateFormatter, yearFormatter: self.yearFormatter, timeFormatter: self.timeFormatter)
             return cell
         case 2:
             let cell: TextCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-            let dateString = self.dateFormatter.string(from: self.movie.releaseDate)
-            let timeString = self.timeFormatter.localizedString(fromTimeInterval: Double(self.movie.runtime))
-            cell.label.text = "\(dateString )  ·  \(timeString)"
+            cell.label.text = self.movie.genres[indexPath.row]
             return cell
         default:
             let cell: PlaceholderCell = collectionView.dequeueReusableCell(indexPath: indexPath)
@@ -92,9 +102,9 @@ private extension DetailViewController {
             case 0:
                 return self.makeImageSection(layoutEnvironment: layoutEnvironment)
             case 1:
-                return self.makeRatingSection(layoutEnvironment: layoutEnvironment)
+                return self.makeFactsSection(layoutEnvironment: layoutEnvironment)
             case 2:
-                return self.makeReleaseDateSection(layoutEnvironment: layoutEnvironment)
+                return self.makeGenreSection(layoutEnvironment: layoutEnvironment)
             case 3:
                 return self.makeTitleSection(layoutEnvironment: layoutEnvironment)
             case 4:
@@ -134,13 +144,30 @@ private extension DetailViewController {
         return section
     }
 
-    static func makeRatingSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+    static func makeFactsSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .estimated(107))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(107))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(top: 19, leading: 0, bottom: 0, trailing: 0)
+
+        return section
+    }
+
+    static func makeGenreSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(30),
                                               heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .estimated(15))
+                                               heightDimension: .estimated(20))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
@@ -149,6 +176,8 @@ private extension DetailViewController {
 
         return section
     }
+
+
 
     static func makeReleaseDateSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100),
@@ -252,10 +281,16 @@ private extension DetailViewController {
         return formatter
     }
 
-    func makeTimeFormatter() -> RelativeDateTimeFormatter {
-        let formatter = RelativeDateTimeFormatter()
-        formatter.unitsStyle = .short
-        formatter.dateTimeStyle = .numeric
+    func makeYearFormatter() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        return formatter
+    }
+
+    func makeTimeFormatter() -> DateComponentsFormatter {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .abbreviated
+        formatter.allowedUnits = [.hour, .minute]
         return formatter
     }
 }
