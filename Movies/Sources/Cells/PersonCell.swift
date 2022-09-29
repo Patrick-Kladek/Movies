@@ -73,7 +73,7 @@ private extension PersonCell {
         label.adjustsFontForContentSizeCategory = true
         label.textColor = .white
         label.font = TextStyle.detail.font
-        label.numberOfLines = 2
+        label.numberOfLines = 3
         return label
     }
 
@@ -81,9 +81,9 @@ private extension PersonCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontForContentSizeCategory = true
-        label.textColor = Asset.Colors.mediumEmphasis.color
+        label.textColor = Asset.Colors.mediumEmphasisLight.color
         label.font = TextStyle.detailSecondary.font
-        label.numberOfLines = 2
+        label.numberOfLines = 3
         return label
     }
 

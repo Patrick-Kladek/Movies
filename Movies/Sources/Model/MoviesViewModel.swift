@@ -54,6 +54,22 @@ extension Director {
     }
 }
 
+// MARK: - Cast
+
+private var associateCastImageKey: Void?
+
+extension Cast {
+
+    var image: UIImage? {
+        get {
+            return objc_getAssociatedObject(self, &associateCastImageKey) as? UIImage
+        }
+        set {
+            objc_setAssociatedObject(self, &associateCastImageKey, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+}
+
 
 // MARK: - Private
 
