@@ -66,6 +66,12 @@ class MoviesViewController: UICollectionViewController {
         self.collectionView.sendSubviewToBack(view)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.collectionView(self.collectionView, didSelectItemAt: IndexPath(row: 0, section: 1))
+    }
+
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -149,6 +155,20 @@ class MoviesViewController: UICollectionViewController {
         }
 
         return cell
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            break
+        case 1:
+            let movie = self.viewModel.favorites[indexPath.row]
+            let detailViewController = DetailViewController(movie: movie)
+            let navigationController = UINavigationController(rootViewController: detailViewController)
+            self.present(navigationController, animated: false)
+        default:
+            break
+        }
     }
 }
 

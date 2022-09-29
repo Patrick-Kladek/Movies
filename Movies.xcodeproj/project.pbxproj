@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		CD0726ED28E482C9006E8389 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726EC28E482C9006E8389 /* DateFormatter.swift */; };
+		CD0726EF28E483D7006E8389 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726EE28E483D7006E8389 /* DetailViewController.swift */; };
+		CD0726F128E48762006E8389 /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F028E48762006E8389 /* RatingCell.swift */; };
+		CD0726F328E5BBFF006E8389 /* PlaceholderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F228E5BBFF006E8389 /* PlaceholderCell.swift */; };
+		CD0726F528E5BD00006E8389 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F428E5BD00006E8389 /* TextCell.swift */; };
 		CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89CA28E35311002EB75D /* RatingView.swift */; };
 		CD7D89DB28E35C56002EB75D /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */; };
 		CD7D89DD28E3618F002EB75D /* Notes.md in Resources */ = {isa = PBXBuildFile; fileRef = CD7D89DC28E3618F002EB75D /* Notes.md */; };
@@ -41,6 +45,11 @@
 
 /* Begin PBXFileReference section */
 		CD0726EC28E482C9006E8389 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		CD0726EE28E483D7006E8389 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		CD0726F028E48762006E8389 /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
+		CD0726F228E5BBFF006E8389 /* PlaceholderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderCell.swift; sourceTree = "<group>"; };
+		CD0726F428E5BD00006E8389 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
+		CD0726F628E5C27D006E8389 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		CD7D89CA28E35311002EB75D /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
 		CD7D89DC28E3618F002EB75D /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
@@ -119,6 +128,9 @@
 				CDEB57DD28DCEF4200F0CBC9 /* PosterCell.swift */,
 				CD7D89E928E379CF002EB75D /* MoreCell.swift */,
 				CDEB57D228DCADC200F0CBC9 /* SearchCell.swift */,
+				CD0726F028E48762006E8389 /* RatingCell.swift */,
+				CD0726F228E5BBFF006E8389 /* PlaceholderCell.swift */,
+				CD0726F428E5BD00006E8389 /* TextCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -127,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				CDA3E29B28D4D7ED003E3278 /* MoviesViewController.swift */,
+				CD0726EE28E483D7006E8389 /* DetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -351,16 +364,20 @@
 				CD7D89EF28E37C0E002EB75D /* PillButton.swift in Sources */,
 				CDEB57DC28DCEBB900F0CBC9 /* TextStyle.swift in Sources */,
 				CDA3E29C28D4D7ED003E3278 /* MoviesViewController.swift in Sources */,
+				CD0726F528E5BD00006E8389 /* TextCell.swift in Sources */,
 				CDEB57DA28DCBC2200F0CBC9 /* UIFont+Weight.swift in Sources */,
 				CDEB57D328DCADC200F0CBC9 /* SearchCell.swift in Sources */,
 				CDEB57E428DCFF0700F0CBC9 /* Dependencies.swift in Sources */,
 				CDA3E29828D4D7ED003E3278 /* AppDelegate.swift in Sources */,
+				CD0726F328E5BBFF006E8389 /* PlaceholderCell.swift in Sources */,
 				CDEB57DE28DCEF4200F0CBC9 /* PosterCell.swift in Sources */,
 				CDA3E2BD28D4FAF0003E3278 /* MovieCell.swift in Sources */,
 				CDEB57D528DCB30000F0CBC9 /* HeaderCell.swift in Sources */,
 				CD7D89DB28E35C56002EB75D /* XCAssets+Generated.swift in Sources */,
 				CDA3E29A28D4D7ED003E3278 /* SceneDelegate.swift in Sources */,
+				CD0726F128E48762006E8389 /* RatingCell.swift in Sources */,
 				CD7D89E428E37120002EB75D /* Optional.swift in Sources */,
+				CD0726EF28E483D7006E8389 /* DetailViewController.swift in Sources */,
 				CDA3E2B328D4ED6B003E3278 /* Model.swift in Sources */,
 				CD0726ED28E482C9006E8389 /* DateFormatter.swift in Sources */,
 				CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */,

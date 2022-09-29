@@ -106,7 +106,7 @@ private extension MovieCell {
     }
 
     func setup() {
-        self.addSubview(self.imageView)
+        self.contentView.addSubview(self.imageView)
         NSLayoutConstraint.activate([
             self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
             self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 28),
@@ -115,26 +115,26 @@ private extension MovieCell {
             self.imageView.widthAnchor.constraint(equalToConstant: 60)
         ])
 
-        self.addSubview(self.titleLabel)
+        self.contentView.addSubview(self.titleLabel)
         NSLayoutConstraint.activate([
             self.titleLabel.centerYAnchor.constraint(equalTo: self.imageView.centerYAnchor),
             self.titleLabel.leadingAnchor.constraint(equalTo: self.imageView.trailingAnchor, constant: 26)
         ])
 
-        self.addSubview(self.subtitleLabel)
+        self.contentView.addSubview(self.subtitleLabel)
         NSLayoutConstraint.activate([
             self.subtitleLabel.leadingAnchor.constraint(equalTo: self.titleLabel.leadingAnchor),
             self.subtitleLabel.bottomAnchor.constraint(equalTo: self.titleLabel.topAnchor)
         ])
 
-        self.addSubview(self.ratingView)
+        self.contentView.addSubview(self.ratingView)
         NSLayoutConstraint.activate([
             self.ratingView.leadingAnchor.constraint(equalTo: self.titleLabel.leadingAnchor),
             self.ratingView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor),
             self.ratingView.widthAnchor.constraint(equalTo: self.ratingView.heightAnchor, multiplier: 5)
         ])
 
-        self.addSubview(self.bookmarkButton)
+        self.contentView.addSubview(self.bookmarkButton)
         NSLayoutConstraint.activate([
             self.bookmarkButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             self.bookmarkButton.heightAnchor.constraint(equalToConstant: 19),
