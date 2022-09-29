@@ -23,3 +23,12 @@ cyclomatic_complexity:
     ignores_case_statements: true
 vertical_whitespace:
   max_empty_lines: 2
+
+
+custom_rules:
+  no_color_initializers:
+    excluded: ".*Colors.swift"
+    name: "Don't use color initializers"
+    regex: '\sUIColor\(.*\)'
+    message: "Only use the colors from Asset Catalogue"
+    severity: error
