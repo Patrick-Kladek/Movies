@@ -165,6 +165,7 @@ class MoviesViewController: UICollectionViewController {
             let movie = self.viewModel.favorites[indexPath.row]
             let detailViewController = DetailViewController(movie: movie)
             let navigationController = UINavigationController(rootViewController: detailViewController)
+            navigationController.overrideUserInterfaceStyle = .light
             self.present(navigationController, animated: false)
         default:
             break

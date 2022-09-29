@@ -31,6 +31,7 @@ internal enum Asset {
     internal static let highEmphasis = ColorAsset(name: "High Emphasis")
     internal static let lowEmphasis = ColorAsset(name: "Low Emphasis")
     internal static let mediumEmphasis = ColorAsset(name: "Medium Emphasis")
+    internal static let veryLowEmphasis = ColorAsset(name: "Very Low Emphasis")
   }
   internal enum Images {
     internal static let background = ImageAsset(name: "Background")

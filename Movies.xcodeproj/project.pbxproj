@@ -13,6 +13,8 @@
 		CD0726F328E5BBFF006E8389 /* PlaceholderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F228E5BBFF006E8389 /* PlaceholderCell.swift */; };
 		CD0726F528E5BD00006E8389 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F428E5BD00006E8389 /* TextCell.swift */; };
 		CD0726F828E5C648006E8389 /* FactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F728E5C648006E8389 /* FactsCell.swift */; };
+		CD0726FA28E5C841006E8389 /* NSCollectionViewLayout+VerticallCentered.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F928E5C841006E8389 /* NSCollectionViewLayout+VerticallCentered.swift */; };
+		CD0726FC28E5E604006E8389 /* GenreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726FB28E5E604006E8389 /* GenreCell.swift */; };
 		CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89CA28E35311002EB75D /* RatingView.swift */; };
 		CD7D89DB28E35C56002EB75D /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */; };
 		CD7D89DD28E3618F002EB75D /* Notes.md in Resources */ = {isa = PBXBuildFile; fileRef = CD7D89DC28E3618F002EB75D /* Notes.md */; };
@@ -51,6 +53,8 @@
 		CD0726F228E5BBFF006E8389 /* PlaceholderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderCell.swift; sourceTree = "<group>"; };
 		CD0726F428E5BD00006E8389 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
 		CD0726F728E5C648006E8389 /* FactsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsCell.swift; sourceTree = "<group>"; };
+		CD0726F928E5C841006E8389 /* NSCollectionViewLayout+VerticallCentered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionViewLayout+VerticallCentered.swift"; sourceTree = "<group>"; };
+		CD0726FB28E5E604006E8389 /* GenreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCell.swift; sourceTree = "<group>"; };
 		CD7D89CA28E35311002EB75D /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
 		CD7D89DC28E3618F002EB75D /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 				CD0726F228E5BBFF006E8389 /* PlaceholderCell.swift */,
 				CD0726F428E5BD00006E8389 /* TextCell.swift */,
 				CD0726F728E5C648006E8389 /* FactsCell.swift */,
+				CD0726FB28E5E604006E8389 /* GenreCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 				CDEB57D728DCB71800F0CBC9 /* String+Formatting.swift */,
 				CDEB57D928DCBC2200F0CBC9 /* UIFont+Weight.swift */,
 				CD0726EC28E482C9006E8389 /* DateFormatter.swift */,
+				CD0726F928E5C841006E8389 /* NSCollectionViewLayout+VerticallCentered.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -376,6 +382,7 @@
 				CDEB57DE28DCEF4200F0CBC9 /* PosterCell.swift in Sources */,
 				CDA3E2BD28D4FAF0003E3278 /* MovieCell.swift in Sources */,
 				CDEB57D528DCB30000F0CBC9 /* HeaderCell.swift in Sources */,
+				CD0726FA28E5C841006E8389 /* NSCollectionViewLayout+VerticallCentered.swift in Sources */,
 				CD7D89DB28E35C56002EB75D /* XCAssets+Generated.swift in Sources */,
 				CDA3E29A28D4D7ED003E3278 /* SceneDelegate.swift in Sources */,
 				CD0726F128E48762006E8389 /* RatingCell.swift in Sources */,
@@ -389,6 +396,7 @@
 				CDEB57E228DCF9F900F0CBC9 /* Logger+Movie.swift in Sources */,
 				CDEB57E028DCF97300F0CBC9 /* NetworkManager.swift in Sources */,
 				CDA3E2B528D4ED8D003E3278 /* MoviesViewModel.swift in Sources */,
+				CD0726FC28E5E604006E8389 /* GenreCell.swift in Sources */,
 				CD7D89E828E371B2002EB75D /* AnyOptional.swift in Sources */,
 				CD7D89E028E370F8002EB75D /* UserDefault.swift in Sources */,
 				CDA3E2BF28D4FB15003E3278 /* Reusable.swift in Sources */,
@@ -531,6 +539,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BQ6K935NHJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Movies/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -560,6 +569,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BQ6K935NHJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Movies/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

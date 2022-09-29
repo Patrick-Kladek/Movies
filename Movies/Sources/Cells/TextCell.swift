@@ -33,9 +33,11 @@ final class TextCell: UICollectionViewCell, Reusable {
 private extension TextCell {
 
     static func makeLabel() -> UILabel {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontForContentSizeCategory = true
+        label.font = TextStyle.bodySecondary.font
+        return label
     }
 
     func setup() {
@@ -47,6 +49,6 @@ private extension TextCell {
             self.label.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
 
-        self.backgroundColor = .clear
+        self.backgroundColor = .quaternarySystemFill
     }
 }

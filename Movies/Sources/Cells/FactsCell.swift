@@ -97,7 +97,5 @@ private extension FactsCell {
             self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         ])
-
-        self.backgroundColor = .quaternarySystemFill
     }
 }
