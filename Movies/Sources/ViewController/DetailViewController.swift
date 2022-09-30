@@ -19,6 +19,7 @@ final class DetailViewController: UICollectionViewController {
     private lazy var dateFormatter: DateFormatter = self.makeDateFormatter()
     private lazy var yearFormatter: DateFormatter = self.makeYearFormatter()
     private lazy var timeFormatter: DateComponentsFormatter = self.makeTimeFormatter()
+    private lazy var currencyFormatter: NumberFormatter = self.makeCurrencyFormatter()
 
     // MARK: - Lifecycle
 
@@ -49,17 +50,22 @@ final class DetailViewController: UICollectionViewController {
         self.collectionView.registerReusableCell(PosterCell.self)
         self.collectionView.registerReusableCell(FactsCell.self)
         self.collectionView.registerReusableCell(GenreCell.self)
-        self.collectionView.registerReusableCell(RatingCell.self)
         self.collectionView.registerReusableCell(TextCell.self)
         self.collectionView.registerReusableCell(PersonCell.self)
-        self.collectionView.registerReusableCell(PlaceholderCell.self)
+        self.collectionView.registerReusableCell(KeyFactCell.self)
+        self.collectionView.registerReusableCell(PlaceholderCell.self)  // TODO: Remove
         self.collectionView.registerReusableSupplementaryView(HeaderCell.self)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 6), at: .top, animated: false)
     }
 
     // MARK: - UICollectionViewController
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 6
+        return 7
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -75,7 +81,7 @@ final class DetailViewController: UICollectionViewController {
         case 5:
             return self.movie.cast.count
         case 6:
-            return self.movie.revenue == nil ? 3 : 4
+            return 4
         default:
             return 0
         }
@@ -125,6 +131,28 @@ final class DetailViewController: UICollectionViewController {
                     Logger.moviesViewController.error("Failed to load thumbnail: \(error.localizedDescription)")
                 }
             }
+            return cell
+
+        case 6:
+            let cell: KeyFactCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+
+            switch indexPath.row {
+            case 0:
+                cell.title = NSLocalizedString("Budget", comment: "Label. Short. Detai-Screen. Key Fact Header for Budget")
+                cell.subtitle = self.currencyFormatter.string(for: self.movie.budget)
+            case 1:
+                cell.title = NSLocalizedString("Revenue", comment: "Label. Short. Detai-Screen. Key Fact Header for Revenue")
+                cell.subtitle = self.currencyFormatter.string(for: self.movie.revenue)
+            case 2:
+                cell.title = NSLocalizedString("Original Language", comment: "Label. Short. Detai-Screen. Key Fact Header for Original Language")
+                cell.subtitle = Locale.current.localizedString(forIdentifier: self.movie.language.rawValue)
+            case 3:
+                cell.title = NSLocalizedString("Rating", comment: "Label. Short. Detai-Screen. Key Fact Header for Rating")
+                cell.subtitle = "\(String(format: "%.2f", self.movie.rating)) (\(self.movie.reviews))"
+            default:
+                break
+            }
+
             return cell
 
         default:
@@ -183,9 +211,8 @@ private extension DetailViewController {
                 return self.makePeopleSection(layoutEnvironment: layoutEnvironment)
             case 5:
                 return self.makePeopleSection(layoutEnvironment: layoutEnvironment)
-
             case 6:
-                return Self.makeKeyFactsSection(layoutEnvironment: layoutEnvironment)
+                return self.makeKeyFactsSection(layoutEnvironment: layoutEnvironment)
             default:
                 return nil
             }
@@ -284,23 +311,21 @@ private extension DetailViewController {
         return section
     }
 
-
-
-
-
-
-    static func makeKeyFactsSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalHeight(1.0))
+    func makeKeyFactsSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+                                              heightDimension: .estimated(66))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 12)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(48),
-                                               heightDimension: .absolute(48))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(152))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 50, trailing: 20)
+        section.orthogonalScrollingBehavior = .none
+        section.interGroupSpacing = 20
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 20, bottom: 30, trailing: 20)
+        section.boundarySupplementaryItems = [self.makeHeader()]
 
         return section
     }
@@ -330,6 +355,14 @@ private extension DetailViewController {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .abbreviated
         formatter.allowedUnits = [.hour, .minute]
+        return formatter
+    }
+
+    func makeCurrencyFormatter() -> NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencySymbol = "$"
+        formatter.maximumFractionDigits = 0
         return formatter
     }
 }

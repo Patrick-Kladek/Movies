@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		CD0726ED28E482C9006E8389 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726EC28E482C9006E8389 /* DateFormatter.swift */; };
 		CD0726EF28E483D7006E8389 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726EE28E483D7006E8389 /* DetailViewController.swift */; };
-		CD0726F128E48762006E8389 /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F028E48762006E8389 /* RatingCell.swift */; };
 		CD0726F328E5BBFF006E8389 /* PlaceholderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F228E5BBFF006E8389 /* PlaceholderCell.swift */; };
 		CD0726F528E5BD00006E8389 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F428E5BD00006E8389 /* TextCell.swift */; };
 		CD0726F828E5C648006E8389 /* FactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726F728E5C648006E8389 /* FactsCell.swift */; };
@@ -17,6 +16,7 @@
 		CD0726FC28E5E604006E8389 /* GenreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726FB28E5E604006E8389 /* GenreCell.swift */; };
 		CD0726FE28E5F7D4006E8389 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726FD28E5F7D4006E8389 /* PersonCell.swift */; };
 		CD07270028E5F98B006E8389 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0726FF28E5F98B006E8389 /* GradientView.swift */; };
+		CD07270228E6335B006E8389 /* KeyFactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD07270128E6335B006E8389 /* KeyFactCell.swift */; };
 		CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89CA28E35311002EB75D /* RatingView.swift */; };
 		CD7D89DB28E35C56002EB75D /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */; };
 		CD7D89DD28E3618F002EB75D /* Notes.md in Resources */ = {isa = PBXBuildFile; fileRef = CD7D89DC28E3618F002EB75D /* Notes.md */; };
@@ -51,7 +51,6 @@
 /* Begin PBXFileReference section */
 		CD0726EC28E482C9006E8389 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CD0726EE28E483D7006E8389 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		CD0726F028E48762006E8389 /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
 		CD0726F228E5BBFF006E8389 /* PlaceholderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderCell.swift; sourceTree = "<group>"; };
 		CD0726F428E5BD00006E8389 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
 		CD0726F728E5C648006E8389 /* FactsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsCell.swift; sourceTree = "<group>"; };
@@ -59,6 +58,7 @@
 		CD0726FB28E5E604006E8389 /* GenreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCell.swift; sourceTree = "<group>"; };
 		CD0726FD28E5F7D4006E8389 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		CD0726FF28E5F98B006E8389 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		CD07270128E6335B006E8389 /* KeyFactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFactCell.swift; sourceTree = "<group>"; };
 		CD7D89CA28E35311002EB75D /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
 		CD7D89DC28E3618F002EB75D /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
@@ -137,12 +137,12 @@
 				CDEB57DD28DCEF4200F0CBC9 /* PosterCell.swift */,
 				CD7D89E928E379CF002EB75D /* MoreCell.swift */,
 				CDEB57D228DCADC200F0CBC9 /* SearchCell.swift */,
-				CD0726F028E48762006E8389 /* RatingCell.swift */,
 				CD0726F228E5BBFF006E8389 /* PlaceholderCell.swift */,
 				CD0726F428E5BD00006E8389 /* TextCell.swift */,
 				CD0726F728E5C648006E8389 /* FactsCell.swift */,
 				CD0726FB28E5E604006E8389 /* GenreCell.swift */,
 				CD0726FD28E5F7D4006E8389 /* PersonCell.swift */,
+				CD07270128E6335B006E8389 /* KeyFactCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -391,10 +391,10 @@
 				CD0726FA28E5C841006E8389 /* NSCollectionViewLayout+VerticallCentered.swift in Sources */,
 				CD7D89DB28E35C56002EB75D /* XCAssets+Generated.swift in Sources */,
 				CDA3E29A28D4D7ED003E3278 /* SceneDelegate.swift in Sources */,
-				CD0726F128E48762006E8389 /* RatingCell.swift in Sources */,
 				CD7D89E428E37120002EB75D /* Optional.swift in Sources */,
 				CD0726FE28E5F7D4006E8389 /* PersonCell.swift in Sources */,
 				CD0726EF28E483D7006E8389 /* DetailViewController.swift in Sources */,
+				CD07270228E6335B006E8389 /* KeyFactCell.swift in Sources */,
 				CDA3E2B328D4ED6B003E3278 /* Model.swift in Sources */,
 				CD0726ED28E482C9006E8389 /* DateFormatter.swift in Sources */,
 				CD07270028E5F98B006E8389 /* GradientView.swift in Sources */,
