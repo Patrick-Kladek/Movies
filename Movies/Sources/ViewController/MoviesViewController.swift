@@ -10,6 +10,8 @@ import UIKit
 import Combine
 
 protocol MoviesViewControllerDelegate: AnyObject {
+    func moviesViewControllerDidSelectSearch(_ viewController: MoviesViewController)
+    func moviesViewControllerDidSelectSeeAll(_ viewController: MoviesViewController)
     func moviesViewController(_ viewController: MoviesViewController, didSelect movie: Movie)
 }
 
@@ -166,7 +168,7 @@ class MoviesViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            break
+            self.delegate?.moviesViewControllerDidSelectSearch(self)
         case 1:
             let movie = self.viewModel.favorites[indexPath.row]
             self.delegate?.moviesViewController(self, didSelect: movie)

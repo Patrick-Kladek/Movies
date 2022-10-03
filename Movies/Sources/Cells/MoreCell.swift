@@ -28,8 +28,6 @@ final class MoreCell: UICollectionViewCell, Reusable {
 private extension MoreCell {
 
     func makeButton() -> UIButton {
-        // TODO: Look into using UIButton.Configuration. Might solve the deprecated warning
-
         var config: UIButton.Configuration = .filled()
         config.background.backgroundColor = .white
         config.cornerStyle = .capsule
@@ -45,6 +43,7 @@ private extension MoreCell {
 
         let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isEnabled = false
 
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.9
@@ -52,25 +51,6 @@ private extension MoreCell {
         button.layer.shadowRadius = 20
 
         return button
-
-//
-//        let button = PillButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.semanticContentAttribute = .forceRightToLeft
-//        button.setImage(Asset.Images.more.image, for: .normal)
-//        button.setTitle("See all", for: .normal)
-//        button.setTitleColor(Asset.Colors.highEmphasis.color, for: .normal)
-//        button.titleLabel?.font = TextStyle.button.font
-//        button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
-//        button.imageEdgeInsets = UIEdgeInsets(top: 2, left: 6, bottom: 2, right: 0)
-//        button.backgroundColor = .white
-//
-//        button.layer.shadowColor = UIColor.black.cgColor
-//        button.layer.shadowOpacity = 0.9
-//        button.layer.shadowOffset = .init(width: 0, height: 4)
-//        button.layer.shadowRadius = 20
-//
-//        return button
     }
 
     func setup() {
@@ -79,7 +59,5 @@ private extension MoreCell {
             self.button.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
             self.button.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
         ])
-
-//        self.backgroundColor = .quateßrnarySystemFill
     }
 }

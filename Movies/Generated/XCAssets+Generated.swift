@@ -27,14 +27,19 @@ internal enum Asset {
   internal enum Colors {
     internal static let accentColor = ColorAsset(name: "AccentColor")
     internal static let background = ColorAsset(name: "Background")
+    internal static let elevated = ColorAsset(name: "Elevated")
     internal static let gold = ColorAsset(name: "Gold")
+    internal static let highEmphasisLight = ColorAsset(name: "High Emphasis Light")
     internal static let highEmphasis = ColorAsset(name: "High Emphasis")
+    internal static let lowEmphasisLight = ColorAsset(name: "Low Emphasis Light")
     internal static let lowEmphasis = ColorAsset(name: "Low Emphasis")
     internal static let mediumEmphasisLight = ColorAsset(name: "Medium Emphasis Light")
     internal static let mediumEmphasis = ColorAsset(name: "Medium Emphasis")
+    internal static let placeholder = ColorAsset(name: "Placeholder")
     internal static let veryLowEmphasis = ColorAsset(name: "Very Low Emphasis")
   }
   internal enum Images {
+    internal static let back = ImageAsset(name: "Back")
     internal static let background = ImageAsset(name: "Background")
     internal static let bookmarkSelected = ImageAsset(name: "Bookmark-Selected")
     internal static let bookmark = ImageAsset(name: "Bookmark")

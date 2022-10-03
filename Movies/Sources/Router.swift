@@ -21,11 +21,22 @@ final class Router {
     // MARK: - Router
 
     func start() {
+        let searchViewController = SearchViewController()
+        self.window.rootViewController = searchViewController
+        self.window.makeKeyAndVisible()
+
+        return
+
+
         do {
             let viewModel = try MoviesViewModel()
             let moviesViewController = MoviesViewController(viewModel: viewModel, dependencies: self.dependencies)
             moviesViewController.delegate = self
-            self.window.rootViewController = moviesViewController
+
+            let navigationController = UINavigationController(rootViewController: moviesViewController)
+            navigationController.setNavigationBarHidden(true, animated: false)
+
+            self.window.rootViewController = navigationController
             self.window.makeKeyAndVisible()
         } catch LoadingError.fileMissing(let name) {
             fatalError("Could not load movies with name: \(name). Check Build Pipeline")
@@ -38,6 +49,14 @@ final class Router {
 // MARK: - MoviesViewControllerDelegate
 
 extension Router: MoviesViewControllerDelegate {
+
+    func moviesViewControllerDidSelectSearch(_ viewController: MoviesViewController) {
+        print(#function)
+    }
+
+    func moviesViewControllerDidSelectSeeAll(_ viewController: MoviesViewController) {
+        print(#function)
+    }
 
     func moviesViewController(_ viewController: MoviesViewController, didSelect movie: Movie) {
         let detailViewController = DetailViewController(movie: movie, dependencies: self.dependencies)

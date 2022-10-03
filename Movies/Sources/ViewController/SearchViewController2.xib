@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="Movies" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="iN0-l3-epB" id="Ch8-Zq-rD6"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Kr-n4-zKK">
+                    <rect key="frame" x="0.0" y="0.0" width="390" height="116"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ERv-dQ-hNd" customClass="RoundedView" customModule="Movies" customModuleProvider="target">
+                            <rect key="frame" x="30" y="60" width="330" height="48"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Back" translatesAutoresizingMaskIntoConstraints="NO" id="kch-EK-veR">
+                                    <rect key="frame" x="17" y="17" width="14" height="14"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="kch-EK-veR" secondAttribute="height" multiplier="1:1" id="1qN-au-iLw"/>
+                                    </constraints>
+                                </imageView>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search all movies" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Arw-Uj-mcu">
+                                    <rect key="frame" x="55" y="14.666666666666673" width="245" height="18.666666666666671"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" red="0.14117647058823529" green="0.19607843137254902" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="Arw-Uj-mcu" firstAttribute="centerY" secondItem="ERv-dQ-hNd" secondAttribute="centerY" id="K0d-13-VEX"/>
+                                <constraint firstAttribute="height" constant="48" id="Lo3-cC-w5U"/>
+                                <constraint firstAttribute="bottom" secondItem="kch-EK-veR" secondAttribute="bottom" constant="17" id="O7Y-Ld-QYu"/>
+                                <constraint firstItem="kch-EK-veR" firstAttribute="top" secondItem="ERv-dQ-hNd" secondAttribute="top" constant="17" id="Ss0-Fy-Avh"/>
+                                <constraint firstAttribute="trailing" secondItem="Arw-Uj-mcu" secondAttribute="trailing" constant="30" id="W1M-PA-Jg7"/>
+                                <constraint firstItem="kch-EK-veR" firstAttribute="leading" secondItem="ERv-dQ-hNd" secondAttribute="leading" constant="17" id="dFd-Mb-mHH"/>
+                                <constraint firstItem="Arw-Uj-mcu" firstAttribute="leading" secondItem="kch-EK-veR" secondAttribute="trailing" constant="24" id="nJv-9B-6dj"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                    <size key="value" width="0.0" height="3"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                    <real key="value" value="30"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                    <real key="value" value="50"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="ERv-dQ-hNd" firstAttribute="leading" secondItem="8Kr-n4-zKK" secondAttribute="leading" constant="30" id="DNw-gS-yY7"/>
+                        <constraint firstAttribute="trailing" secondItem="ERv-dQ-hNd" secondAttribute="trailing" constant="30" id="dqJ-CR-Zyx"/>
+                        <constraint firstAttribute="bottom" secondItem="ERv-dQ-hNd" secondAttribute="bottom" constant="8" id="k1E-8r-njb"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="diE-PF-EQe"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="8Kr-n4-zKK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="00h-5v-gQp"/>
+                <constraint firstAttribute="trailing" secondItem="8Kr-n4-zKK" secondAttribute="trailing" id="Qtz-86-k1J"/>
+                <constraint firstItem="ERv-dQ-hNd" firstAttribute="top" secondItem="diE-PF-EQe" secondAttribute="top" constant="13" id="ahU-Ph-y96"/>
+                <constraint firstItem="8Kr-n4-zKK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="q1P-cu-Gkb"/>
+            </constraints>
+            <point key="canvasLocation" x="130.76923076923077" y="41.943127962085306"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Back" width="15" height="15"/>
+    </resources>
+</document>
