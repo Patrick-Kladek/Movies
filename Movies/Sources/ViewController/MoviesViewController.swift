@@ -9,6 +9,10 @@ import os.log
 import UIKit
 import Combine
 
+protocol MoviesViewControllerDelegate: AnyObject {
+    func moviesViewController(_ viewController: MoviesViewController, didSelect movie: Movie)
+}
+
 class MoviesViewController: UICollectionViewController {
 
     typealias Dependencies = HasNetworkManager
@@ -20,7 +24,9 @@ class MoviesViewController: UICollectionViewController {
     private var backgroundImageView: UIImageView?
     private var cancelables: Set<AnyCancellable> = []
 
-    // MARK: - Private
+    weak var delegate: MoviesViewControllerDelegate?
+
+    // MARK: - Lifecycle
 
     init(viewModel: MoviesViewModel, dependencies: Dependencies) {
         self.viewModel = viewModel
@@ -70,12 +76,6 @@ class MoviesViewController: UICollectionViewController {
 
         guard let view = self.backgroundImageView else { return }
         self.collectionView.sendSubviewToBack(view)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        self.collectionView(self.collectionView, didSelectItemAt: IndexPath(row: 1, section: 1))
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -169,10 +169,10 @@ class MoviesViewController: UICollectionViewController {
             break
         case 1:
             let movie = self.viewModel.favorites[indexPath.row]
-            let detailViewController = DetailViewController(movie: movie, dependencies: dependencies)
-            let navigationController = UINavigationController(rootViewController: detailViewController)
-            navigationController.overrideUserInterfaceStyle = .light
-            self.present(navigationController, animated: false)
+            self.delegate?.moviesViewController(self, didSelect: movie)
+        case 2:
+            let movie = self.viewModel.staffPicks[indexPath.row]
+            self.delegate?.moviesViewController(self, didSelect: movie)
         default:
             break
         }

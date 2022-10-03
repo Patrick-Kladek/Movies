@@ -59,11 +59,6 @@ final class DetailViewController: UICollectionViewController {
         self.collectionView.registerReusableSupplementaryView(HeaderCell.self)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 6), at: .top, animated: false)
-    }
-
     // MARK: - UICollectionViewController
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

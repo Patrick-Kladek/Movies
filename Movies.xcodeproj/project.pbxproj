@@ -24,6 +24,7 @@
 		CD4A052A28EB1CCB0097F656 /* AnyOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89E728E371B2002EB75D /* AnyOptional.swift */; };
 		CD4A052C28EB1D0E0097F656 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4A052B28EB1D0E0097F656 /* Key.swift */; };
 		CD4A052E28EB1DB00097F656 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89E328E37120002EB75D /* Optional.swift */; };
+		CD4A053028EB2AF50097F656 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4A052F28EB2AF50097F656 /* Router.swift */; };
 		CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89CA28E35311002EB75D /* RatingView.swift */; };
 		CD7D89DB28E35C56002EB75D /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */; };
 		CD7D89DD28E3618F002EB75D /* Notes.md in Resources */ = {isa = PBXBuildFile; fileRef = CD7D89DC28E3618F002EB75D /* Notes.md */; };
@@ -91,6 +92,7 @@
 		CD4A051828EB18640097F656 /* DefaultsKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultsKit.h; sourceTree = "<group>"; };
 		CD4A052228EB186D0097F656 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		CD4A052B28EB1D0E0097F656 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		CD4A052F28EB2AF50097F656 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		CD7D89CA28E35311002EB75D /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		CD7D89DA28E35C56002EB75D /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
 		CD7D89DC28E3618F002EB75D /* Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Notes.md; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 			children = (
 				CDA3E29728D4D7ED003E3278 /* AppDelegate.swift */,
 				CDA3E29928D4D7ED003E3278 /* SceneDelegate.swift */,
+				CD4A052F28EB2AF50097F656 /* Router.swift */,
 				CD7D89EC28E379EF002EB75D /* ViewController */,
 				CD7D89E128E370FB002EB75D /* Property Wrapper */,
 				CD7D89EB28E379DE002EB75D /* Cells */,
@@ -503,6 +506,7 @@
 				CDEB57D328DCADC200F0CBC9 /* SearchCell.swift in Sources */,
 				CDEB57E428DCFF0700F0CBC9 /* Dependencies.swift in Sources */,
 				CDA3E29828D4D7ED003E3278 /* AppDelegate.swift in Sources */,
+				CD4A053028EB2AF50097F656 /* Router.swift in Sources */,
 				CD0726F328E5BBFF006E8389 /* PlaceholderCell.swift in Sources */,
 				CD0726F828E5C648006E8389 /* FactsCell.swift in Sources */,
 				CDEB57DE28DCEF4200F0CBC9 /* PosterCell.swift in Sources */,
