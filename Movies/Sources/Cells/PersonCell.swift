@@ -124,12 +124,14 @@ private extension PersonCell {
             self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8)
         ])
 
-        self.layer.cornerRadius = 12
         self.gradientView.layer.cornerRadius = 12
+        self.gradientView.layer.cornerCurve = .continuous
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.3
         self.layer.shadowOffset = CGSize(width: 0, height: 4)
         self.layer.shadowRadius = 30
+        self.layer.cornerRadius = 12
+        self.layer.cornerCurve = .continuous
 
         self.backgroundColor = .quaternarySystemFill
     }

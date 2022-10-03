@@ -7,6 +7,7 @@
 
 import os.log
 import UIKit
+import Combine
 
 class MoviesViewController: UICollectionViewController {
 
@@ -17,6 +18,7 @@ class MoviesViewController: UICollectionViewController {
     private let viewModel: MoviesViewModel
     private let dependencies: Dependencies
     private var backgroundImageView: UIImageView?
+    private var cancelables: Set<AnyCancellable> = []
 
     // MARK: - Private
 
@@ -57,6 +59,10 @@ class MoviesViewController: UICollectionViewController {
             imageView.widthAnchor.constraint(equalTo: self.collectionView.widthAnchor)
         ])
         self.backgroundImageView = imageView
+
+        AppDefaults.$bookmarked.sink { _ in
+            self.collectionView.reloadData()
+        }.store(in: &self.cancelables)
     }
 
     override func viewDidLayoutSubviews() {

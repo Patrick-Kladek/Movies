@@ -47,13 +47,15 @@ final class DetailViewController: UICollectionViewController {
         self.collectionView.collectionViewLayout = self.makeLayout()
         self.collectionViewLayout.invalidateLayout()
 
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: Asset.Images.close.image, style: .plain, target: self, action: #selector(closeSheet))
+        self.navigationItem.rightBarButtonItem = self.makeBookmarkItem()
+
         self.collectionView.registerReusableCell(PosterCell.self)
         self.collectionView.registerReusableCell(FactsCell.self)
         self.collectionView.registerReusableCell(GenreCell.self)
         self.collectionView.registerReusableCell(TextCell.self)
         self.collectionView.registerReusableCell(PersonCell.self)
         self.collectionView.registerReusableCell(KeyFactCell.self)
-        self.collectionView.registerReusableCell(PlaceholderCell.self)  // TODO: Remove
         self.collectionView.registerReusableSupplementaryView(HeaderCell.self)
     }
 
@@ -156,8 +158,7 @@ final class DetailViewController: UICollectionViewController {
             return cell
 
         default:
-            let cell: PlaceholderCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-            return cell
+            fatalError("Unknown Section, could not create UICollectionViewCell")
         }
 
     }
@@ -364,5 +365,28 @@ private extension DetailViewController {
         formatter.currencySymbol = "$"
         formatter.maximumFractionDigits = 0
         return formatter
+    }
+
+    func makeBookmarkItem() -> UIBarButtonItem {
+        if AppDefaults.bookmarked.contains(self.movie.id) {
+            return UIBarButtonItem(image: Asset.Images.bookmarkSelected.image, style: .plain, target: self, action: #selector(bookmarkMovie))
+        } else {
+            return UIBarButtonItem(image: Asset.Images.bookmark.image, style: .plain, target: self, action: #selector(bookmarkMovie))
+        }
+    }
+
+    @objc
+    func closeSheet() {
+        self.dismiss(animated: true)
+    }
+
+    @objc
+    func bookmarkMovie(_ sender: UIBarButtonItem) {
+        if AppDefaults.bookmarked.contains(self.movie.id) {
+            AppDefaults.bookmarked.removeAll { $0 == self.movie.id }
+        } else {
+            AppDefaults.bookmarked.append(self.movie.id)
+        }
+        self.navigationItem.rightBarButtonItem = self.makeBookmarkItem()
     }
 }

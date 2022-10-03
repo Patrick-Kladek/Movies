@@ -38,6 +38,7 @@ internal enum Asset {
     internal static let background = ImageAsset(name: "Background")
     internal static let bookmarkSelected = ImageAsset(name: "Bookmark-Selected")
     internal static let bookmark = ImageAsset(name: "Bookmark")
+    internal static let close = ImageAsset(name: "Close")
     internal static let more = ImageAsset(name: "More")
     internal static let search = ImageAsset(name: "Search")
   }
