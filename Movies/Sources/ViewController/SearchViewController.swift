@@ -201,6 +201,9 @@ private extension SearchViewController {
         view.layer.shadowOpacity = 0.5
         view.layer.shadowOffset = CGSize(width: 0, height: 3)
 
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapSearch))
+        view.addGestureRecognizer(tapGesture)
+
         view.addSubview(self.backButton)
         NSLayoutConstraint.activate([
             self.backButton.imageView!.topAnchor.constraint(equalTo: view.topAnchor, constant: 17),
@@ -302,6 +305,11 @@ private extension SearchViewController {
     @objc
     func backButtonPressed(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+
+    @objc
+    func didTapSearch(_ sender: Any) {
+        self.searchField.becomeFirstResponder()
     }
 
     func updatePlaceholder(visible: Bool) {
