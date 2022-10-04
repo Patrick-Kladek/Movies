@@ -24,7 +24,7 @@ final class Router {
 
     func start() {
         let viewModel = try! MoviesViewModel()
-        let movies = viewModel.favorites + viewModel.staffPicks
+        let movies = (viewModel.favorites + viewModel.staffPicks).uniqued()
         let searchViewController = SearchViewController(movies: movies, dependencies: self.dependencies)
         searchViewController.delegate = self
 

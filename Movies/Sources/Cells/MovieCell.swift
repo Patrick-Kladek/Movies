@@ -106,6 +106,10 @@ private extension MovieCell {
         button.setImage(Asset.Images.bookmarkSelected.image, for: .selected)
         button.setImage(Asset.Images.bookmark.image, for: .normal)
         button.addTarget(self, action: #selector(bookmarkTapped), for: .touchUpInside)
+        button.setContentCompressionResistancePriority(.required, for: .horizontal)
+        button.setContentCompressionResistancePriority(.required, for: .vertical)
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        button.setContentHuggingPriority(.defaultHigh, for: .vertical)
         return button
     }
 

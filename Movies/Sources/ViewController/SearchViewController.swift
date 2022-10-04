@@ -69,10 +69,11 @@ final class SearchViewController: UIViewController {
 
                 return Int(round(movie.rating)) == filterValue.rawValue
             }
-
-            print("filter: \(filterValue)")
-            print(self.currentMovies.map { $0.title })
             self.collectionView.reloadData()
+        }.store(in: &self.cancelables)
+
+        AppDefaults.$bookmarked.sink { [weak self] _ in
+            self?.collectionView.reloadData()
         }.store(in: &self.cancelables)
     }
 
@@ -128,7 +129,6 @@ extension SearchViewController: MovieCellDelegate {
 
     func movieCellBookmarkChanged(_ cell: MovieCell) {
         guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
-        guard indexPath.section == 2 else { return }
 
         let movie = self.currentMovies[indexPath.row]
         if cell.isFavourite {
@@ -136,6 +136,23 @@ extension SearchViewController: MovieCellDelegate {
         } else {
             AppDefaults.bookmarked.removeAll { movie.id == $0 }
         }
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension SearchViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.currentMovies = self.movies.filter {
+            guard let text = textField.text else { return true }
+            guard text.isEmpty == false else { return true }
+
+            return $0.title.contains(text)
+        }
+        self.collectionView.reloadData()
+
+        return true
     }
 }
 
@@ -208,6 +225,7 @@ private extension SearchViewController {
     func makeSearchField() -> UITextField {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.delegate = self
         textField.attributedPlaceholder = NSAttributedString(string: "Search all movies", attributes: [
             .foregroundColor: Asset.Colors.lowEmphasisLight.color,
             .font: TextStyle.input.font

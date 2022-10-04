@@ -70,8 +70,8 @@ class MoviesViewController: UICollectionViewController {
         ])
         self.backgroundImageView = imageView
 
-        AppDefaults.$bookmarked.sink { _ in
-            self.collectionView.reloadData()
+        AppDefaults.$bookmarked.sink { [weak self] _ in
+            self?.collectionView.reloadData()
         }.store(in: &self.cancelables)
     }
 

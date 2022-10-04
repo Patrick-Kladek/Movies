@@ -28,6 +28,7 @@
 		CD4A053228EB37C50097F656 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4A053128EB37C50097F656 /* SearchViewController.swift */; };
 		CD7036DE28EC9E11002B28BD /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7036DD28EC9E11002B28BD /* FilterViewController.swift */; };
 		CD7036E028EC9F49002B28BD /* UIViewController+Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7036DF28EC9F49002B28BD /* UIViewController+Child.swift */; };
+		CD7036E228ECBC95002B28BD /* Array+Unique.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7036E128ECBC95002B28BD /* Array+Unique.swift */; };
 		CD75FE0928EB688600F40BAD /* UIView+InterfaceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75FE0828EB688600F40BAD /* UIView+InterfaceBuilder.swift */; };
 		CD75FE0B28EB7A5A00F40BAD /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75FE0A28EB7A5A00F40BAD /* RatingCell.swift */; };
 		CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89CA28E35311002EB75D /* RatingView.swift */; };
@@ -101,6 +102,7 @@
 		CD4A053128EB37C50097F656 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CD7036DD28EC9E11002B28BD /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		CD7036DF28EC9F49002B28BD /* UIViewController+Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Child.swift"; sourceTree = "<group>"; };
+		CD7036E128ECBC95002B28BD /* Array+Unique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Unique.swift"; sourceTree = "<group>"; };
 		CD75FE0828EB688600F40BAD /* UIView+InterfaceBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+InterfaceBuilder.swift"; sourceTree = "<group>"; };
 		CD75FE0A28EB7A5A00F40BAD /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
 		CD7D89CA28E35311002EB75D /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 				CD0726F928E5C841006E8389 /* NSCollectionViewLayout+VerticallCentered.swift */,
 				CD75FE0828EB688600F40BAD /* UIView+InterfaceBuilder.swift */,
 				CD7036DF28EC9F49002B28BD /* UIViewController+Child.swift */,
+				CD7036E128ECBC95002B28BD /* Array+Unique.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				CD7036E028EC9F49002B28BD /* UIViewController+Child.swift in Sources */,
 				CD07270228E6335B006E8389 /* KeyFactCell.swift in Sources */,
 				CDA3E2B328D4ED6B003E3278 /* Model.swift in Sources */,
+				CD7036E228ECBC95002B28BD /* Array+Unique.swift in Sources */,
 				CD0726ED28E482C9006E8389 /* DateFormatter.swift in Sources */,
 				CD07270028E5F98B006E8389 /* GradientView.swift in Sources */,
 				CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */,
