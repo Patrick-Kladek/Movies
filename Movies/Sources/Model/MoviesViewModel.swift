@@ -16,6 +16,10 @@ struct MoviesViewModel {
     let favorites: Movies
     let staffPicks: Movies
 
+    var allMovies: Movies {
+        return (self.favorites + self.staffPicks).uniqued()
+    }
+
     init() throws {
         self.favorites = try Array(Self.loadMovies(named: "movies")[0...2])
         self.staffPicks = try Self.loadMovies(named: "staff_picks")

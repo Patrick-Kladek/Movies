@@ -23,18 +23,18 @@ final class Router {
     // MARK: - Router
 
     func start() {
-        let viewModel = try! MoviesViewModel()
-        let movies = (viewModel.favorites + viewModel.staffPicks).uniqued()
-        let searchViewController = SearchViewController(movies: movies, dependencies: self.dependencies)
-        searchViewController.delegate = self
-
-        let navigationController = UINavigationController(rootViewController: searchViewController)
-        navigationController.setNavigationBarHidden(true, animated: false)
-
-        self.window.rootViewController = navigationController
-        self.window.makeKeyAndVisible()
-
-        return
+//        let viewModel = try! MoviesViewModel()
+//        let movies = (viewModel.favorites + viewModel.staffPicks).uniqued()
+//        let searchViewController = SearchViewController(movies: movies, dependencies: self.dependencies)
+//        searchViewController.delegate = self
+//
+//        let navigationController = UINavigationController(rootViewController: searchViewController)
+//        navigationController.setNavigationBarHidden(true, animated: false)
+//
+//        self.window.rootViewController = navigationController
+//        self.window.makeKeyAndVisible()
+//
+//        return
 
 
         do {
@@ -69,15 +69,15 @@ extension Router: MoviesViewControllerDelegate {
             return
         }
 
-        let movies = viewModel.favorites + viewModel.staffPicks
-        let searchViewController = SearchViewController(movies: movies, dependencies: self.dependencies)
+        let searchViewController = SearchViewController(movies: viewModel.allMovies, dependencies: self.dependencies)
         searchViewController.delegate = self
 
         viewController.navigationController?.pushViewController(searchViewController, animated: true)
     }
 
     func moviesViewControllerDidSelectSeeAll(_ viewController: MoviesViewController) {
-        print(#function)
+        // Same App Flow
+        self.moviesViewControllerDidSelectSearch(viewController)
     }
 
     func moviesViewController(_ viewController: MoviesViewController, didSelect movie: Movie) {
@@ -98,11 +98,4 @@ extension Router: SearchViewControllerDelegate {
         navigationController.overrideUserInterfaceStyle = .light
         viewController.present(navigationController, animated: true)
     }
-}
-
-
-// MAKR: - Private
-
-private extension Router {
-
 }

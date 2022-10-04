@@ -168,6 +168,11 @@ class MoviesViewController: UICollectionViewController {
         case 0:
             self.delegate?.moviesViewControllerDidSelectSearch(self)
         case 1:
+            if indexPath.row == 3 {
+                self.delegate?.moviesViewControllerDidSelectSeeAll(self)
+                return
+            }
+
             let movie = self.viewModel.favorites[indexPath.row]
             self.delegate?.moviesViewController(self, didSelect: movie)
         case 2:

@@ -9,7 +9,10 @@ import UIKit
 
 final class MoreCell: UICollectionViewCell, Reusable {
 
-    private lazy var button: UIButton = self.makeButton()
+    private lazy var pill: UIView = self.makePill()
+    private lazy var stackView: UIStackView = self.makeStackView()
+    private lazy var imageView: UIImageView = self.makeImageView()
+    private lazy var label: UILabel = self.makeLabel()
 
     // MARK: - Lifecycle
 
@@ -27,38 +30,57 @@ final class MoreCell: UICollectionViewCell, Reusable {
 
 private extension MoreCell {
 
-    func makeButton() -> UIButton {
-        var config: UIButton.Configuration = .filled()
-        config.background.backgroundColor = .white
-        config.cornerStyle = .capsule
-        config.attributedTitle = AttributedString("See All", attributes: .init([
-            NSAttributedString.Key.font: TextStyle.button.font
-        ]))
-        config.baseForegroundColor = Asset.Colors.highEmphasis.color
-        config.image = Asset.Images.more.image
-        config.imagePadding = 6
-        config.imagePlacement = .trailing
-        config.buttonSize = .medium
-        config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
+    func makePill() -> UIView {
+        let view = PillButton()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.9
+        view.layer.shadowOffset = .init(width: 0, height: 4)
+        view.layer.shadowRadius = 20
+        return view
+    }
 
-        let button = UIButton(configuration: config)
-        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.isEnabled = false
-        button.setTitleColor(Asset.Colors.highEmphasis.color, for: .normal)
+    func makeStackView() -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: [self.label, self.imageView])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 6
+        return stackView
+    }
 
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.9
-        button.layer.shadowOffset = .init(width: 0, height: 4)
-        button.layer.shadowRadius = 20
+    func makeImageView() -> UIImageView {
+        let imageView = UIImageView(image: Asset.Images.more.image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }
 
-        return button
+    func makeLabel() -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontForContentSizeCategory = true
+        label.font = TextStyle.button.font
+        label.textColor = Asset.Colors.highEmphasis.color
+        label.text = "See all"
+        return label
     }
 
     func setup() {
-        self.contentView.addSubview(self.button)
+        self.pill.addSubview(self.stackView)
         NSLayoutConstraint.activate([
-            self.button.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-            self.button.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+            self.stackView.leadingAnchor.constraint(equalTo: self.pill.leadingAnchor, constant: 12),
+            self.stackView.topAnchor.constraint(equalTo: self.pill.topAnchor, constant: 8),
+            self.stackView.trailingAnchor.constraint(equalTo: self.pill.trailingAnchor, constant: -12),
+            self.stackView.bottomAnchor.constraint(equalTo: self.pill.bottomAnchor, constant: -8)
         ])
+
+        self.contentView.addSubview(self.pill)
+        NSLayoutConstraint.activate([
+            self.pill.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            self.pill.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+        ])
+
+        self.pill.isUserInteractionEnabled = false
     }
 }
