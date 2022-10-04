@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class FilterViewController: UICollectionViewController {
 
@@ -18,6 +19,7 @@ final class FilterViewController: UICollectionViewController {
         case noFilter = 5
     }
 
+    @Published
     private(set) var filter: Filter = .noFilter
 
     // MARK: - Lifecycle

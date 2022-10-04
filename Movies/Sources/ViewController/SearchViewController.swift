@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class SearchViewController: UIViewController {
 
@@ -23,8 +24,9 @@ final class SearchViewController: UIViewController {
     private lazy var searchField: UITextField = self.makeSearchField()
     private lazy var collectionView: UICollectionView = self.makeCollectionView()
     private lazy var filterViewController: FilterViewController = self.makeFilterViewController()
+    private lazy var shadowView: UIView = self.makeShadowView()
 
-    private var filter: Filter = .noFilter
+    private var cancelables: [AnyCancellable] = []
 
     // MARK: - Lifecycle
 
@@ -45,6 +47,17 @@ final class SearchViewController: UIViewController {
         self.setup()
 
         self.collectionView.registerReusableCell(PlaceholderCell.self)
+
+        self.filterViewController.$filter.sink { filterValue in
+            print("filter: \(filterValue)")
+        }.store(in: &self.cancelables)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        let bottomInset = self.view.safeAreaInsets.bottom + 12
+        self.collectionView.scrollIndicatorInsets = .init(top: 0, left: 0, bottom: bottomInset, right: 0)
     }
 }
 
@@ -71,40 +84,13 @@ extension SearchViewController: UICollectionViewDataSource {
 extension SearchViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-
-        if self.filter.rawValue == indexPath.row {
-            self.filter = .noFilter
-            collectionView.deselectItem(at: indexPath, animated: true)
-        } else {
-            self.filter = Filter(rawValue: indexPath.row)!
-        }
+        print(#function)
     }
 }
 
 // MARK: - Private
 
 private extension SearchViewController {
-
-    static func makeSliderSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let estimatedHeight: CGFloat = 29
-        let estimatedWidth: CGFloat = 57
-
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth),
-                                              heightDimension: .absolute(estimatedHeight))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth),
-                                               heightDimension: .estimated(estimatedHeight))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-        section.interGroupSpacing = 20
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 46, bottom: 0, trailing: 46)
-
-        return section
-    }
 
     static func makeListSection(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let estimatedHeight: CGFloat = 141
@@ -183,6 +169,13 @@ private extension SearchViewController {
         return viewController
     }
 
+    func makeShadowView() -> UIView {
+        let view = GradientView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.colors = [Asset.Colors.highEmphasis.color, .clear]
+        return view
+    }
+
     func makeCollectionView() -> UICollectionView {
         let layout = UICollectionViewCompositionalLayout { _, layoutEnvironment in
             return Self.makeListSection(layoutEnvironment: layoutEnvironment)
@@ -192,6 +185,8 @@ private extension SearchViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
         collectionView.dataSource = self
+//        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.automaticallyAdjustsScrollIndicatorInsets = false
         return collectionView
     }
 
@@ -220,6 +215,14 @@ private extension SearchViewController {
             self.collectionView.topAnchor.constraint(equalTo: self.filterViewController.view.bottomAnchor, constant: 15),
             self.collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+
+        self.view.addSubview(self.shadowView)
+        NSLayoutConstraint.activate([
+            self.shadowView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.shadowView.topAnchor.constraint(equalTo: self.filterViewController.view.bottomAnchor),
+            self.shadowView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.shadowView.heightAnchor.constraint(equalToConstant: 56)
         ])
     }
 }

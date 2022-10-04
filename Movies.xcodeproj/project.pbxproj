@@ -28,7 +28,6 @@
 		CD4A053228EB37C50097F656 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4A053128EB37C50097F656 /* SearchViewController.swift */; };
 		CD7036DE28EC9E11002B28BD /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7036DD28EC9E11002B28BD /* FilterViewController.swift */; };
 		CD7036E028EC9F49002B28BD /* UIViewController+Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7036DF28EC9F49002B28BD /* UIViewController+Child.swift */; };
-		CD75FE0728EB673A00F40BAD /* SearchViewController2.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD75FE0628EB673A00F40BAD /* SearchViewController2.xib */; };
 		CD75FE0928EB688600F40BAD /* UIView+InterfaceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75FE0828EB688600F40BAD /* UIView+InterfaceBuilder.swift */; };
 		CD75FE0B28EB7A5A00F40BAD /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75FE0A28EB7A5A00F40BAD /* RatingCell.swift */; };
 		CD7D89CB28E35311002EB75D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89CA28E35311002EB75D /* RatingView.swift */; };
@@ -102,7 +101,6 @@
 		CD4A053128EB37C50097F656 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CD7036DD28EC9E11002B28BD /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		CD7036DF28EC9F49002B28BD /* UIViewController+Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Child.swift"; sourceTree = "<group>"; };
-		CD75FE0628EB673A00F40BAD /* SearchViewController2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController2.xib; sourceTree = "<group>"; };
 		CD75FE0828EB688600F40BAD /* UIView+InterfaceBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+InterfaceBuilder.swift"; sourceTree = "<group>"; };
 		CD75FE0A28EB7A5A00F40BAD /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
 		CD7D89CA28E35311002EB75D /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
@@ -233,7 +231,6 @@
 			children = (
 				CDA3E29B28D4D7ED003E3278 /* MoviesViewController.swift */,
 				CD4A053128EB37C50097F656 /* SearchViewController.swift */,
-				CD75FE0628EB673A00F40BAD /* SearchViewController2.xib */,
 				CD0726EE28E483D7006E8389 /* DetailViewController.swift */,
 				CD7036DD28EC9E11002B28BD /* FilterViewController.swift */,
 			);
@@ -450,7 +447,6 @@
 			files = (
 				CDA3E2A428D4D7EE003E3278 /* LaunchScreen.storyboard in Resources */,
 				CD7D89DD28E3618F002EB75D /* Notes.md in Resources */,
-				CD75FE0728EB673A00F40BAD /* SearchViewController2.xib in Resources */,
 				CDA3E2BB28D4F5B3003E3278 /* staff_picks.json in Resources */,
 				CDA3E2B128D4EBF4003E3278 /* movies.json in Resources */,
 				CDA3E2A128D4D7EE003E3278 /* Assets.xcassets in Resources */,

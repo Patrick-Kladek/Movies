@@ -36,11 +36,15 @@ final class RatingCell: UICollectionViewCell, Reusable {
         }
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        self.stackView.arrangedSubviews.forEach { self.stackView.removeArrangedSubview($0) }
+    }
+
     // MAKR: - RatingCell
 
     func configure(with stars: Int) {
-        self.stackView.arrangedSubviews.forEach { self.stackView.removeArrangedSubview($0) }
-
         for _ in 1...stars {
             let image = UIImage(systemName: "star.fill")
             let imageView = UIImageView(image: image)
