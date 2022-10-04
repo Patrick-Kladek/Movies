@@ -18,4 +18,6 @@ extension Logger {
     static let sceneDelegate = Logger(subsystem: subsystem, category: "SceneDelegate")
     static let networkManager = Logger(subsystem: subsystem, category: "NetworkManager")
     static let moviesViewController = Logger(subsystem: subsystem, category: "MoviesViewController")
+    static let searchViewController = Logger(subsystem: subsystem, category: "MoviesViewController")
+    static let router = Logger(subsystem: subsystem, category: "Router")
 }

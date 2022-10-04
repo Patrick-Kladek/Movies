@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import os.log
 
 final class Router {
 
     private let window: UIWindow
     private let dependencies = GlobalDependencies()
+    private var viewModel: MoviesViewModel?
 
     // MARK: - Lifecycle
 
@@ -21,15 +23,28 @@ final class Router {
     // MARK: - Router
 
     func start() {
-        let searchViewController = SearchViewController()
-        self.window.rootViewController = searchViewController
+        /*
+        let viewModel = try! MoviesViewModel()
+        let movies = viewModel.favorites + viewModel.staffPicks
+        let searchViewController = SearchViewController(movies: movies, dependencies: self.dependencies)
+        searchViewController.delegate = self
+
+        let navigationController = UINavigationController(rootViewController: searchViewController)
+        navigationController.setNavigationBarHidden(true, animated: false)
+
+        self.window.rootViewController = navigationController
         self.window.makeKeyAndVisible()
 
         return
+        */
 
 
         do {
             let viewModel = try MoviesViewModel()
+            defer {
+                self.viewModel = viewModel
+            }
+
             let moviesViewController = MoviesViewController(viewModel: viewModel, dependencies: self.dependencies)
             moviesViewController.delegate = self
 
@@ -51,7 +66,16 @@ final class Router {
 extension Router: MoviesViewControllerDelegate {
 
     func moviesViewControllerDidSelectSearch(_ viewController: MoviesViewController) {
-        print(#function)
+        guard let viewModel = self.viewModel else {
+            Logger.router.error("View Model is nil, abort")
+            return
+        }
+
+        let movies = viewModel.favorites + viewModel.staffPicks
+        let searchViewController = SearchViewController(movies: movies, dependencies: self.dependencies)
+        searchViewController.delegate = self
+
+        viewController.navigationController?.pushViewController(searchViewController, animated: true)
     }
 
     func moviesViewControllerDidSelectSeeAll(_ viewController: MoviesViewController) {
@@ -66,9 +90,21 @@ extension Router: MoviesViewControllerDelegate {
     }
 }
 
+// MARK: - SearchViewControllerDelegate
+
+extension Router: SearchViewControllerDelegate {
+
+    func searchViewController(_ viewController: SearchViewController, didSelect movie: Movie) {
+        let detailViewController = DetailViewController(movie: movie, dependencies: self.dependencies)
+        let navigationController = UINavigationController(rootViewController: detailViewController)
+        navigationController.overrideUserInterfaceStyle = .light
+        viewController.present(navigationController, animated: true)
+    }
+}
+
+
 // MAKR: - Private
 
 private extension Router {
-
 
 }

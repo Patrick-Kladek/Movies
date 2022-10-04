@@ -7,17 +7,17 @@
 
 import UIKit
 import Combine
+import os.log
+
+protocol SearchViewControllerDelegate: AnyObject {
+    func searchViewController(_ viewController: SearchViewController, didSelect movie: Movie)
+}
 
 final class SearchViewController: UIViewController {
 
-    enum Filter: Int {
-        case star5 = 0
-        case star4 = 1
-        case star3 = 2
-        case star2 = 3
-        case star1 = 4
-        case noFilter = 5
-    }
+    typealias Dependencies = HasNetworkManager
+
+    private let dependencies: Dependencies
 
     private lazy var searchContainer: UIView = self.makeSearchContainer()
     private lazy var backButton: UIButton = self.makeBackButton()
@@ -27,10 +27,15 @@ final class SearchViewController: UIViewController {
     private lazy var shadowView: UIView = self.makeShadowView()
 
     private var cancelables: [AnyCancellable] = []
+    private var movies: Movies
+
+    weak var delegate: SearchViewControllerDelegate?
 
     // MARK: - Lifecycle
 
-    init() {
+    init(movies: Movies, dependencies: Dependencies) {
+        self.movies = movies
+        self.dependencies = dependencies
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -40,13 +45,19 @@ final class SearchViewController: UIViewController {
 
     // MARK: - UIViewController
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.overrideUserInterfaceStyle = .dark
+        self.view.backgroundColor = Asset.Colors.background.color
         self.setup()
 
-        self.collectionView.registerReusableCell(PlaceholderCell.self)
+        self.collectionView.registerReusableCell(MovieCell.self)
+        self.collectionView.keyboardDismissMode = .onDrag
 
         self.filterViewController.$filter.sink { filterValue in
             print("filter: \(filterValue)")
@@ -65,16 +76,26 @@ final class SearchViewController: UIViewController {
 
 extension SearchViewController: UICollectionViewDataSource {
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.movies.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: PlaceholderCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+        let movie = self.movies[indexPath.row]
+        let cell: MovieCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+        cell.configure(with: movie, dateFormatter: .yearFormatter)
+        cell.isFavourite = AppDefaults.bookmarked.contains(movie.id)
+        cell.delegate = self
+
+        Task {
+            do {
+                let image = try await self.dependencies.networkManager.loadThumbnail(for: movie)
+                cell.image = image
+            } catch {
+                Logger.searchViewController.error("Failed to load thumbnail: \(error.localizedDescription)")
+            }
+        }
+
         return cell
     }
 }
@@ -84,7 +105,25 @@ extension SearchViewController: UICollectionViewDataSource {
 extension SearchViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(#function)
+        let movie = self.movies[indexPath.row]
+        self.delegate?.searchViewController(self, didSelect: movie)
+    }
+}
+
+// MARK: - MovieCellDelegate
+
+extension SearchViewController: MovieCellDelegate {
+
+    func movieCellBookmarkChanged(_ cell: MovieCell) {
+        guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
+        guard indexPath.section == 2 else { return }
+
+        let movie = self.movies[indexPath.row]
+        if cell.isFavourite {
+            AppDefaults.bookmarked.append(movie.id)
+        } else {
+            AppDefaults.bookmarked.removeAll { movie.id == $0 }
+        }
     }
 }
 
@@ -150,6 +189,7 @@ private extension SearchViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(Asset.Images.back.image, for: .normal)
+        button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         return button
     }
 
@@ -172,7 +212,7 @@ private extension SearchViewController {
     func makeShadowView() -> UIView {
         let view = GradientView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.colors = [Asset.Colors.highEmphasis.color, .clear]
+        view.colors = [Asset.Colors.background.color, .clear]
         return view
     }
 
@@ -185,13 +225,12 @@ private extension SearchViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
         collectionView.dataSource = self
-//        collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.automaticallyAdjustsScrollIndicatorInsets = false
+        collectionView.backgroundColor = .clear
         return collectionView
     }
 
     func setup() {
-        self.view.backgroundColor = Asset.Colors.background.color
         self.view.addSubview(self.searchContainer)
         NSLayoutConstraint.activate([
             self.searchContainer.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 13),
@@ -224,5 +263,10 @@ private extension SearchViewController {
             self.shadowView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.shadowView.heightAnchor.constraint(equalToConstant: 56)
         ])
+    }
+
+    @objc
+    func backButtonPressed(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
 }

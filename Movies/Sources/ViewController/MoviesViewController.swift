@@ -19,8 +19,6 @@ class MoviesViewController: UICollectionViewController {
 
     typealias Dependencies = HasNetworkManager
 
-    private lazy var yearDateFormatter: DateFormatter = self.makeYearDateFormatter()
-
     private let viewModel: MoviesViewModel
     private let dependencies: Dependencies
     private var backgroundImageView: UIImageView?
@@ -42,6 +40,10 @@ class MoviesViewController: UICollectionViewController {
     }
 
     // MARK: - UIViewController
+
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,10 +80,6 @@ class MoviesViewController: UICollectionViewController {
 
         guard let view = self.backgroundImageView else { return }
         self.collectionView.sendSubviewToBack(view)
-    }
-
-    override var prefersStatusBarHidden: Bool {
-        return true
     }
 
     // MARK: UICollectionViewController
@@ -130,7 +128,7 @@ class MoviesViewController: UICollectionViewController {
             let movie = self.viewModel.staffPicks[indexPath.row]
             let cell: MovieCell = collectionView.dequeueReusableCell(indexPath: indexPath)
 
-            cell.configure(with: movie, dateFormatter: self.yearDateFormatter)
+            cell.configure(with: movie, dateFormatter: .yearFormatter)
             cell.isFavourite = AppDefaults.bookmarked.contains(movie.id)
             cell.delegate = self
 
@@ -286,11 +284,5 @@ private extension MoviesViewController {
         section.boundarySupplementaryItems = [header]
 
         return section
-    }
-
-    func makeYearDateFormatter() -> DateFormatter {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy"
-        return dateFormatter
     }
 }

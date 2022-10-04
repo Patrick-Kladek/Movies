@@ -140,6 +140,7 @@ private extension MovieCell {
 
         self.contentView.addSubview(self.bookmarkButton)
         NSLayoutConstraint.activate([
+            self.bookmarkButton.leadingAnchor.constraint(equalTo: self.titleLabel.trailingAnchor, constant: 12),
             self.bookmarkButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
             self.bookmarkButton.heightAnchor.constraint(equalToConstant: 19),
             self.bookmarkButton.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
