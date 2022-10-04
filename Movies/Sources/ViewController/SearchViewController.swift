@@ -9,11 +9,24 @@ import UIKit
 
 final class SearchViewController: UIViewController {
 
+    enum Filter: Int {
+        case star5 = 0
+        case star4 = 1
+        case star3 = 2
+        case star2 = 3
+        case star1 = 4
+        case noFilter = 5
+    }
+
     private lazy var searchContainer: UIView = self.makeSearchContainer()
     private lazy var backButton: UIButton = self.makeBackButton()
     private lazy var searchField: UITextField = self.makeSearchField()
-    private lazy var filterCollectionView: UICollectionView = self.makeFilterCollectionView()
     private lazy var collectionView: UICollectionView = self.makeCollectionView()
+    private lazy var filterViewController: FilterViewController = self.makeFilterViewController()
+
+    private var filter: Filter = .noFilter
+
+    // MARK: - Lifecycle
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -32,7 +45,6 @@ final class SearchViewController: UIViewController {
         self.setup()
 
         self.collectionView.registerReusableCell(PlaceholderCell.self)
-        self.filterCollectionView.registerReusableCell(RatingCell.self)
     }
 }
 
@@ -45,20 +57,10 @@ extension SearchViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.filterCollectionView {
-            return 5
-        }
-
         return 10
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.filterCollectionView {
-            let cell: RatingCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-            cell.configure(with: indexPath.row)
-            return cell
-        }
-
         let cell: PlaceholderCell = collectionView.dequeueReusableCell(indexPath: indexPath)
         return cell
     }
@@ -69,7 +71,14 @@ extension SearchViewController: UICollectionViewDataSource {
 extension SearchViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(#function)
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+
+        if self.filter.rawValue == indexPath.row {
+            self.filter = .noFilter
+            collectionView.deselectItem(at: indexPath, animated: true)
+        } else {
+            self.filter = Filter(rawValue: indexPath.row)!
+        }
     }
 }
 
@@ -85,15 +94,14 @@ private extension SearchViewController {
                                               heightDimension: .absolute(estimatedHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let groupFractionalWidth = 0.5
         let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(estimatedWidth),
                                                heightDimension: .estimated(estimatedHeight))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.interGroupSpacing = 30
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+        section.interGroupSpacing = 20
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 46, bottom: 0, trailing: 46)
 
         return section
     }
@@ -170,17 +178,9 @@ private extension SearchViewController {
         return textField
     }
 
-    func makeFilterCollectionView() -> UICollectionView {
-        let layout = UICollectionViewCompositionalLayout { _, layoutEnvironment in
-            return Self.makeSliderSection(layoutEnvironment: layoutEnvironment)
-        }
-
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.backgroundColor = .clear
-        return collectionView
+    func makeFilterViewController() -> FilterViewController {
+        let viewController = FilterViewController()
+        return viewController
     }
 
     func makeCollectionView() -> UICollectionView {
@@ -204,18 +204,20 @@ private extension SearchViewController {
             self.searchContainer.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
         ])
 
-        self.view.addSubview(self.filterCollectionView)
+        self.view.addSubview(self.filterViewController.view)
+        self.filterViewController.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.filterCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.filterCollectionView.topAnchor.constraint(equalTo: self.searchContainer.bottomAnchor, constant: 20),
-            self.filterCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.filterCollectionView.heightAnchor.constraint(equalToConstant: 29)
+            self.filterViewController.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.filterViewController.view.topAnchor.constraint(equalTo: self.searchContainer.bottomAnchor, constant: 20),
+            self.filterViewController.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.filterViewController.view.heightAnchor.constraint(equalToConstant: 29)
         ])
+
 
         self.view.addSubview(self.collectionView)
         NSLayoutConstraint.activate([
             self.collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.collectionView.topAnchor.constraint(equalTo: self.filterCollectionView.bottomAnchor, constant: 15),
+            self.collectionView.topAnchor.constraint(equalTo: self.filterViewController.view.bottomAnchor, constant: 15),
             self.collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])

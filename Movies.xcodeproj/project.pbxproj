@@ -26,6 +26,8 @@
 		CD4A052E28EB1DB00097F656 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D89E328E37120002EB75D /* Optional.swift */; };
 		CD4A053028EB2AF50097F656 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4A052F28EB2AF50097F656 /* Router.swift */; };
 		CD4A053228EB37C50097F656 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4A053128EB37C50097F656 /* SearchViewController.swift */; };
+		CD7036DE28EC9E11002B28BD /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7036DD28EC9E11002B28BD /* FilterViewController.swift */; };
+		CD7036E028EC9F49002B28BD /* UIViewController+Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7036DF28EC9F49002B28BD /* UIViewController+Child.swift */; };
 		CD75FE0728EB673A00F40BAD /* SearchViewController2.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD75FE0628EB673A00F40BAD /* SearchViewController2.xib */; };
 		CD75FE0928EB688600F40BAD /* UIView+InterfaceBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75FE0828EB688600F40BAD /* UIView+InterfaceBuilder.swift */; };
 		CD75FE0B28EB7A5A00F40BAD /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD75FE0A28EB7A5A00F40BAD /* RatingCell.swift */; };
@@ -98,6 +100,8 @@
 		CD4A052B28EB1D0E0097F656 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		CD4A052F28EB2AF50097F656 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		CD4A053128EB37C50097F656 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		CD7036DD28EC9E11002B28BD /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		CD7036DF28EC9F49002B28BD /* UIViewController+Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Child.swift"; sourceTree = "<group>"; };
 		CD75FE0628EB673A00F40BAD /* SearchViewController2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController2.xib; sourceTree = "<group>"; };
 		CD75FE0828EB688600F40BAD /* UIView+InterfaceBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+InterfaceBuilder.swift"; sourceTree = "<group>"; };
 		CD75FE0A28EB7A5A00F40BAD /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
@@ -231,6 +235,7 @@
 				CD4A053128EB37C50097F656 /* SearchViewController.swift */,
 				CD75FE0628EB673A00F40BAD /* SearchViewController2.xib */,
 				CD0726EE28E483D7006E8389 /* DetailViewController.swift */,
+				CD7036DD28EC9E11002B28BD /* FilterViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 				CD0726EC28E482C9006E8389 /* DateFormatter.swift */,
 				CD0726F928E5C841006E8389 /* NSCollectionViewLayout+VerticallCentered.swift */,
 				CD75FE0828EB688600F40BAD /* UIView+InterfaceBuilder.swift */,
+				CD7036DF28EC9F49002B28BD /* UIViewController+Child.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -532,6 +538,7 @@
 				CDA3E29A28D4D7ED003E3278 /* SceneDelegate.swift in Sources */,
 				CD0726FE28E5F7D4006E8389 /* PersonCell.swift in Sources */,
 				CD0726EF28E483D7006E8389 /* DetailViewController.swift in Sources */,
+				CD7036E028EC9F49002B28BD /* UIViewController+Child.swift in Sources */,
 				CD07270228E6335B006E8389 /* KeyFactCell.swift in Sources */,
 				CDA3E2B328D4ED6B003E3278 /* Model.swift in Sources */,
 				CD0726ED28E482C9006E8389 /* DateFormatter.swift in Sources */,
@@ -541,6 +548,7 @@
 				CD7D89EA28E379CF002EB75D /* MoreCell.swift in Sources */,
 				CDEB57E228DCF9F900F0CBC9 /* Logger+Movie.swift in Sources */,
 				CDEB57E028DCF97300F0CBC9 /* NetworkManager.swift in Sources */,
+				CD7036DE28EC9E11002B28BD /* FilterViewController.swift in Sources */,
 				CDA3E2B528D4ED8D003E3278 /* MoviesViewModel.swift in Sources */,
 				CD0726FC28E5E604006E8389 /* GenreCell.swift in Sources */,
 				CDA3E2BF28D4FB15003E3278 /* Reusable.swift in Sources */,

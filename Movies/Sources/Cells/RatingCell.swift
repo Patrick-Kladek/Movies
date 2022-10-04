@@ -9,7 +9,7 @@ import UIKit
 
 final class RatingCell: UICollectionViewCell, Reusable {
 
-    let label: UILabel = RatingCell.makeLabel()
+    private lazy var stackView: UIStackView = self.makeStackView()
 
     // MARK: - Lifecycle
 
@@ -30,18 +30,30 @@ final class RatingCell: UICollectionViewCell, Reusable {
         self.layer.cornerRadius = self.frame.height/2.0
     }
 
+    override var isSelected: Bool {
+        didSet {
+            self.stackView.arrangedSubviews.forEach { $0.tintColor = self.isSelected ? Asset.Colors.gold.color : .white }
+        }
+    }
+
     // MAKR: - RatingCell
 
     func configure(with stars: Int) {
-        let fullString = NSMutableAttributedString(string: "")
+        self.stackView.arrangedSubviews.forEach { self.stackView.removeArrangedSubview($0) }
 
-        for i in (0...5).reversed() where i - stars > 0 {
-            let imageAttachment = NSTextAttachment()
-            imageAttachment.image = UIImage(systemName: "star.fill")?.withTintColor(.white)
-            fullString.append(NSAttributedString(attachment: imageAttachment))
+        for _ in 1...stars {
+            let image = UIImage(systemName: "star.fill")
+            let imageView = UIImageView(image: image)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.contentMode = .scaleAspectFit
+            imageView.tintColor = .white
+            NSLayoutConstraint.activate([
+                imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
+                imageView.heightAnchor.constraint(equalToConstant: 12)
+            ])
+
+            self.stackView.addArrangedSubview(imageView)
         }
-
-        self.label.attributedText = fullString
     }
 }
 
@@ -49,22 +61,22 @@ final class RatingCell: UICollectionViewCell, Reusable {
 
 private extension RatingCell {
 
-    static func makeLabel() -> UILabel {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontForContentSizeCategory = true
-        label.font = UIFont.systemFont(ofSize: 5)
-        label.textColor = .black
-        return label
+    func makeStackView() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.spacing = 2
+        return stackView
     }
 
     func setup() {
-        self.contentView.addSubview(self.label)
+        self.contentView.addSubview(self.stackView)
         NSLayoutConstraint.activate([
-            self.label.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
-            self.label.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5),
-            self.label.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
-            self.label.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5)
+            self.stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
+            self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5),
+            self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
+            self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5)
         ])
 
         self.backgroundColor = .clear
