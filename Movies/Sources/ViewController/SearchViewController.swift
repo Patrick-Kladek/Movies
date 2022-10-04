@@ -28,6 +28,7 @@ final class SearchViewController: UIViewController {
 
     private var cancelables: [AnyCancellable] = []
     private var movies: Movies
+    private var currentMovies: Movies = []
 
     weak var delegate: SearchViewControllerDelegate?
 
@@ -35,6 +36,7 @@ final class SearchViewController: UIViewController {
 
     init(movies: Movies, dependencies: Dependencies) {
         self.movies = movies
+        self.currentMovies = movies
         self.dependencies = dependencies
         super.init(nibName: nil, bundle: nil)
     }
@@ -59,8 +61,18 @@ final class SearchViewController: UIViewController {
         self.collectionView.registerReusableCell(MovieCell.self)
         self.collectionView.keyboardDismissMode = .onDrag
 
-        self.filterViewController.$filter.sink { filterValue in
+        self.filterViewController.$filter.sink { [weak self] filterValue in
+            guard let self else { return }
+
+            self.currentMovies = self.movies.filter { movie in
+                if filterValue == .noFilter { return true }
+
+                return Int(round(movie.rating)) == filterValue.rawValue
+            }
+
             print("filter: \(filterValue)")
+            print(self.currentMovies.map { $0.title })
+            self.collectionView.reloadData()
         }.store(in: &self.cancelables)
     }
 
@@ -77,11 +89,11 @@ final class SearchViewController: UIViewController {
 extension SearchViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.movies.count
+        return self.currentMovies.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let movie = self.movies[indexPath.row]
+        let movie = self.currentMovies[indexPath.row]
         let cell: MovieCell = collectionView.dequeueReusableCell(indexPath: indexPath)
         cell.configure(with: movie, dateFormatter: .yearFormatter)
         cell.isFavourite = AppDefaults.bookmarked.contains(movie.id)
@@ -105,7 +117,7 @@ extension SearchViewController: UICollectionViewDataSource {
 extension SearchViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let movie = self.movies[indexPath.row]
+        let movie = self.currentMovies[indexPath.row]
         self.delegate?.searchViewController(self, didSelect: movie)
     }
 }
@@ -118,7 +130,7 @@ extension SearchViewController: MovieCellDelegate {
         guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
         guard indexPath.section == 2 else { return }
 
-        let movie = self.movies[indexPath.row]
+        let movie = self.currentMovies[indexPath.row]
         if cell.isFavourite {
             AppDefaults.bookmarked.append(movie.id)
         } else {

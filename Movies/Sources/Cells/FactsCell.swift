@@ -30,7 +30,7 @@ final class FactsCell: UICollectionViewCell, Reusable {
     // MARK: - PosterCell
 
     func configure(with movie: Movie, dateFormatter: DateFormatter, yearFormatter: DateFormatter, timeFormatter: DateComponentsFormatter) {
-        self.ratingView.currentRating = Int(floor(movie.rating))
+        self.ratingView.currentRating = Int(round(movie.rating))
 
         let dateString = dateFormatter.string(from: movie.releaseDate)
         let timeString = timeFormatter.string(from: Double(movie.runtime * 60))!

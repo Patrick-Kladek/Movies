@@ -23,7 +23,6 @@ final class Router {
     // MARK: - Router
 
     func start() {
-        /*
         let viewModel = try! MoviesViewModel()
         let movies = viewModel.favorites + viewModel.staffPicks
         let searchViewController = SearchViewController(movies: movies, dependencies: self.dependencies)
@@ -36,7 +35,6 @@ final class Router {
         self.window.makeKeyAndVisible()
 
         return
-        */
 
 
         do {

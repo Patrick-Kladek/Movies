@@ -59,7 +59,7 @@ final class MovieCell: UICollectionViewCell, Reusable {
     func configure(with movie: Movie, dateFormatter: DateFormatter) {
         self.subtitleLabel.text = dateFormatter.string(from: movie.releaseDate)
         self.titleLabel.text = movie.title
-        self.ratingView.currentRating = Int(floor(movie.rating))
+        self.ratingView.currentRating = Int(round(movie.rating))
     }
 }
 

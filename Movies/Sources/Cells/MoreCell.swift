@@ -43,7 +43,8 @@ private extension MoreCell {
 
         let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.isEnabled = false
+//        button.isEnabled = false
+        button.setTitleColor(Asset.Colors.highEmphasis.color, for: .normal)
 
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.9

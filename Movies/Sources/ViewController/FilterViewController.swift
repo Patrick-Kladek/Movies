@@ -11,12 +11,12 @@ import Combine
 final class FilterViewController: UICollectionViewController {
 
     enum Filter: Int {
-        case star5 = 0
-        case star4 = 1
-        case star3 = 2
-        case star2 = 3
-        case star1 = 4
-        case noFilter = 5
+        case star5 = 5
+        case star4 = 4
+        case star3 = 3
+        case star2 = 2
+        case star1 = 1
+        case noFilter = 0
     }
 
     @Published
@@ -61,11 +61,12 @@ final class FilterViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.filter.rawValue == indexPath.row {
+        let target = 5 - indexPath.row
+        if self.filter.rawValue == target {
             self.filter = .noFilter
             collectionView.deselectItem(at: indexPath, animated: true)
         } else {
-            self.filter = Filter(rawValue: indexPath.row)!
+            self.filter = Filter(rawValue: target)!
         }
     }
 }
