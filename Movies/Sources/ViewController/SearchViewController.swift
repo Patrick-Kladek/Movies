@@ -28,7 +28,11 @@ final class SearchViewController: UIViewController {
 
     private var cancelables: [AnyCancellable] = []
     private var movies: Movies
-    private var currentMovies: Movies = []
+    private var currentMovies: Movies = [] {
+        didSet {
+            self.updatePlaceholder(visible: self.currentMovies.isEmpty)
+        }
+    }
 
     weak var delegate: SearchViewControllerDelegate?
 
@@ -146,7 +150,7 @@ extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.currentMovies = self.movies.filter {
             guard let text = textField.text else { return true }
-            guard text.isEmpty == false else { return true }
+            guard text.hasElements else { return true }
 
             return $0.title.contains(text)
         }
@@ -226,6 +230,7 @@ private extension SearchViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.delegate = self
+        textField.autocorrectionType = .no
         textField.attributedPlaceholder = NSAttributedString(string: "Search all movies", attributes: [
             .foregroundColor: Asset.Colors.lowEmphasisLight.color,
             .font: TextStyle.input.font
@@ -277,7 +282,6 @@ private extension SearchViewController {
             self.filterViewController.view.heightAnchor.constraint(equalToConstant: 29)
         ])
 
-
         self.view.addSubview(self.collectionView)
         NSLayoutConstraint.activate([
             self.collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -298,5 +302,39 @@ private extension SearchViewController {
     @objc
     func backButtonPressed(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+
+    func updatePlaceholder(visible: Bool) {
+        if visible == false {
+            self.collectionView.backgroundView?.removeFromSuperview()
+            self.collectionView.backgroundView = nil
+            return
+        }
+
+        let image = Asset.Images.movie.image
+        let imageView = UIImageView(image: image)
+        imageView.tintColor = Asset.Colors.lowEmphasisLight.color
+
+        let label = UILabel()
+        label.text = "No Movies found 😞"
+        label.font = TextStyle.bodyTitle.font
+        label.textColor = Asset.Colors.mediumEmphasisLight.color
+
+        let stackView = UIStackView(arrangedSubviews: [imageView, label])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .equalCentering
+        stackView.spacing = 30
+
+        let view = UIView()
+        view.accessibilityIdentifier = "BackgroundView"
+        view.addSubview(stackView)
+
+        self.collectionView.backgroundView = view
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100)
+        ])
     }
 }

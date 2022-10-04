@@ -38,3 +38,10 @@ extension Movie: Hashable {
         hasher.combine(self.id)
     }
 }
+
+extension Collection {
+
+    var hasElements: Bool {
+        return self.isEmpty == false
+    }
+}
