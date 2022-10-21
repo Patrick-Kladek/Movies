@@ -192,13 +192,6 @@
 			path = Generated;
 			sourceTree = "<group>";
 		};
-		CD7D89E128E370FB002EB75D /* Property Wrapper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Property Wrapper";
-			sourceTree = "<group>";
-		};
 		CD7D89E228E3710E002EB75D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,7 +300,6 @@
 				CDA3E29928D4D7ED003E3278 /* SceneDelegate.swift */,
 				CD4A052F28EB2AF50097F656 /* Router.swift */,
 				CD7D89EC28E379EF002EB75D /* ViewController */,
-				CD7D89E128E370FB002EB75D /* Property Wrapper */,
 				CD7D89EB28E379DE002EB75D /* Cells */,
 				CD7D89E228E3710E002EB75D /* Model */,
 				CDEB57DB28DCEBB900F0CBC9 /* TextStyle.swift */,

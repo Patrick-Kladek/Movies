@@ -23,20 +23,6 @@ final class Router {
     // MARK: - Router
 
     func start() {
-//        let viewModel = try! MoviesViewModel()
-//        let movies = (viewModel.favorites + viewModel.staffPicks).uniqued()
-//        let searchViewController = SearchViewController(movies: movies, dependencies: self.dependencies)
-//        searchViewController.delegate = self
-//
-//        let navigationController = UINavigationController(rootViewController: searchViewController)
-//        navigationController.setNavigationBarHidden(true, animated: false)
-//
-//        self.window.rootViewController = navigationController
-//        self.window.makeKeyAndVisible()
-//
-//        return
-
-
         do {
             let viewModel = try MoviesViewModel()
             defer {

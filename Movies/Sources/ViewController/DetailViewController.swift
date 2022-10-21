@@ -15,7 +15,6 @@ final class DetailViewController: UICollectionViewController {
     private let movie: Movie
     private let dependencies: Dependencies
 
-//    private lazy var layout: UICollectionViewLayout = self.makeLayout()
     private lazy var dateFormatter: DateFormatter = self.makeDateFormatter()
     private lazy var yearFormatter: DateFormatter = self.makeYearFormatter()
     private lazy var timeFormatter: DateComponentsFormatter = self.makeTimeFormatter()
