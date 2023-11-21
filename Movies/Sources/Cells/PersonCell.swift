@@ -63,7 +63,7 @@ private extension PersonCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 14
+        imageView.layer.cornerRadius = 12
         return imageView
     }
 
